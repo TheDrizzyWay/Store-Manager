@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<title> Admin - Home</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="description" content="Store Manager Admin Home Page" />
+	<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+	<div id="headerContainer">
+		<header>
+			<div class="headerDiv">
+				<h1>Store Manager</h1>
+				<h3>Hi Admin. You can view all products<br>
+					and sales here.
+				</h3>
+			</div>
+		</header>
+	</div>
+	<nav class="navbar">
+		<ul class=navbarList>
+			<li><a href="#">ADMIN-HOME</a></li>
+			<li><a href="adminedit.html">EDIT</a></li>
+			<li><a href="admincreate.html">CREATE</a></li>
+			<li><a href="../index.html">LOGOUT</a></li>
+		</ul>
+	</nav>
+	<div></div>
+	<form id="selectForm">
+		<select name="select" class="select">
+			<option>Products</option>
+			<option>Product Categories</option>
+			<option>Store Attendants</option>
+		</select>
+		<button type="submit" class="submit">Search</button>
+	</form>
+	<div id="resultDiv">
+	</div>
+	<footer>
+		<p>Powered by TheDrizzyWay &#169; 2018</p>
+	</footer>
+	<script type="text/javascript" src="../javascripts/adminhome.js"></script>
+</body>
+</html>

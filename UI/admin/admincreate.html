@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<title> Admin - Create</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="description" content="Store Manager Admin Create Page" />
+	<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+	<div id="headerContainer">
+		<header>
+			<div class="headerDiv">
+				<h1>Store Manager</h1>
+				<h3>Here, you can create new products, categories,<br>
+					and accounts for your attendants.
+				</h3>
+			</div>
+		</header>
+	</div>
+	<nav class="navbar">
+		<ul class=navbarList>
+			<li><a href="adminhome.html">ADMIN-HOME</a></li>
+			<li><a href="adminedit.html">EDIT</a></li>
+			<li><a href="#">CREATE</a></li>
+			<li><a href="../index.html">LOGOUT</a></li>
+		</ul>
+	</nav>
+	<div></div>
+	<form id="selectForm">
+		<select name="select" class="select">
+			<option>New Product</option>
+			<option>New Category</option>
+			<option>New Account</option>
+		</select>
+		<button type="submit" class="submit">Create</button>
+	</form>
+	<div id="resultDiv">
+	</div>
+	<footer>
+		<p>Powered by TheDrizzyWay &#169; 2018</p>
+	</footer>
+	<script type="text/javascript" src="../javascripts/admincreate.js"></script>
+</body>
+</html>

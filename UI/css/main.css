@@ -1,0 +1,145 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background-color: #dc143c;
+	width: 100%;
+	height: 100%;
+}
+#headerContainer {
+	display: grid;
+}
+
+header {
+	background: url("../images/unsplashphoto81101.jpg");
+	width: 100%;
+	height: 250px;
+	text-align: center;
+	background-size: cover;
+  background-attachment: fixed;
+	position: relative;
+	overflow: hidden;
+	border-radius: 0 0 90% 90% / 30%;
+}
+
+.headerdiv {
+	width: 100%;
+	height: 100%;
+	padding: 50px;
+	color: #ffffff;
+}
+
+h1 {
+	font-family: 'Tahoma', sans-serif;
+	font-weight: bolder;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	color: #ffffff;
+	text-shadow: 1px 1px 1px #333333;
+}
+
+h3 {
+	font-family: 'Open Sans', sans-serif;
+	font-style: italic;
+	font-weight: bold;
+	margin-bottom: 30px;
+	color: #ffffff;
+	text-shadow: 1px 1px 1px #333333;
+}
+
+form {
+  background: white;
+  width: 100%;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+  font-family: 'lato', sans-serif;
+  position: relative;
+  color: #333333;
+  border-radius: 10px;
+}
+
+form p {
+  background: #FF3838;
+  padding: 30px 20px;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  border-radius: 10px 10px 0 0;
+}
+
+form label {
+  margin-left: 20px;
+  display: inline-block;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+form label span {
+  color: #FF3838;
+  font-size: 2em;
+  position: absolute;
+  left: 2.3em;
+  top: -10px;
+}
+
+form input {
+  display: block;
+  width: 90%;
+  margin-left: 20px;
+  padding: 5px 20px;
+  font-size: 1em;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid #ccc;
+}
+
+form .help {
+  margin-left: 20px;
+  font-size: 0.8em;
+  color: #777;
+}
+
+form button {
+  position: relative;
+  width: 150px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-family: inherit;
+  color: white;
+  background: #FF3838;
+  outline: none;
+  border: none;
+  padding: 5px 15px;
+  font-size: 1.3em;
+  font-weight: 400;
+  border-radius: 3px;
+  box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.4);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+form button:hover {
+  background: #dc143c;
+}
+
+footer {
+	text-align: center;
+	color: #ffffff;
+	font-size: 20px;
+	margin-top: 10px;
+}
+
+#check1 {
+  text-decoration: none;
+  color: #dc143c;
+  background-color: #ffffff;
+}
+
+#check1:hover {
+  color: #ffffff;
+  background-color: #ff0000;
+}
