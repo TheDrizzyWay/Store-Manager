@@ -1,0 +1,41 @@
+{
+  "name": "store-manager",
+  "version": "1.0.0",
+  "description": "Store Manager is a web application that helps store owners manage sales and product inventory records.",
+  "main": "app.js",
+  "scripts": {
+    "test": "nyc mocha --require babel-core/register ./test/**/*.js",
+    "start": "node_modules/.bin/nodemon api/app.js --exec babel-node --"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheDrizzyWay/Store-Manager.git"
+  },
+  "author": "Christopher Iliyas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheDrizzyWay/Store-Manager/issues"
+  },
+  "homepage": "https://github.com/TheDrizzyWay/Store-Manager#readme",
+  "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.16.4",
+    "moment": "^2.22.2",
+    "uuid": "^3.3.2",
+    "validator": "^10.8.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-istanbul": "^0.12.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
+  }
+}
