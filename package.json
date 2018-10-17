@@ -4,7 +4,7 @@
   "description": "Store Manager is a web application that helps store owners manage sales and product inventory records.",
   "main": "app.js",
   "scripts": {
-    "test": "nyc mocha --require babel-core/register ./test/**/*.js",
+    "test": "cross-env NODE_ENV=test nyc mocha --require babel-core/register ./test/**/*.js",
     "start": "node_modules/.bin/nodemon api/app.js --exec babel-node --"
   },
   "repository": {
@@ -20,6 +20,7 @@
   "dependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bcryptjs": "^2.4.3",
+    "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "moment": "^2.22.2",
     "uuid": "^3.3.2",

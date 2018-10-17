@@ -24,6 +24,3 @@ export class User {
     this.dateCreated = moment();
   }
 }
-// create default admin account in allUsers
-// delete user
-// eslint

@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 beforeEach((done) => {
 	chai.request(app)
-		.post('api/v1/users')
+		.post('/api/v1/users')
 		.send(user1)
 		.end((err, res) => {
 			if (err) return done(err);
@@ -24,13 +24,13 @@ afterEach((done) => {
 describe('POST /users', () => {
 	it('should create a new user', (done) => {
 		chai.request(app)
-			.post('api/v1/users')
+			.post('/api/v1/users')
 			.send(user2)
 			.end((err, res) => {
 				if (err) return done(err);
 				expect(res).to.have.status(201);
 				expect(res.body.firstName).equal('Tommy');
 				done();
-			})
+			});
 	});
 });
