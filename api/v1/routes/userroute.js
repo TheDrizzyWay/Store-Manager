@@ -7,11 +7,11 @@ import userLoginValidator from '../middleware/userloginvalidator';
 
 const router = express.Router();
 
-router.post('/', loggedInValidator, adminValidator, createUserValidator, userController.createUser);
-router.post('/login', userLoginValidator, userController.loginUser);
 router.get('/logout', loggedInValidator, userController.logoutUser);
 router.get('/', loggedInValidator, adminValidator, userController.findAllUsers);
 router.get('/:userId', loggedInValidator, adminValidator, userController.findUserById);
+router.post('/', loggedInValidator, adminValidator, createUserValidator, userController.createUser);
+router.post('/login', userLoginValidator, userController.loginUser);
 router.put('/:userId', loggedInValidator, adminValidator, userController.updateUser);
 router.delete('/:userId', loggedInValidator, adminValidator, userController.deleteUser);
 

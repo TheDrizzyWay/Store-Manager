@@ -40,7 +40,7 @@ export default {
   },
 
   findUserById(req, res) {
-    const userId = req.params.id;
+    const userId = req.params.userId;
     const user = allUsers.find(obj => obj.id === userId);
     if (user === undefined) {
       res.status(404).send({ errors: { message: 'User not found.' } });
@@ -49,10 +49,10 @@ export default {
   },
 
   updateUser(req, res) {
-    const userId = req.params.id;
+    const userId = req.params.userId;
     const previousUser = allUsers.find(obj => obj.id === userId);
     if (previousUser === undefined) {
-      res.status(404).send({ errors: { message: 'User not found.' } });
+      return res.status(404).send({ errors: { message: 'User not found.' } });
     }
     const updatedUser = { ...previousUser, ...req.body };
     const index = allUsers.findIndex(obj => obj.id === previousUser.id);
@@ -62,8 +62,11 @@ export default {
   },
 
   deleteUser(req, res) {
-    const userId = req.params.id;
+    const userId = req.params.userId;
     const index = allUsers.findIndex(obj => obj.id === userId);
+    if (!index) {
+      return res.status(404).send({ errors: { message: 'User not found.' } });
+    }
 
     allUsers.splice(index, 1);
     res.status(204).send(allUsers);
