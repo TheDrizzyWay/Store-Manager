@@ -64,7 +64,7 @@ export default {
   deleteUser(req, res) {
     const userId = req.params.userId;
     const index = allUsers.findIndex(obj => obj.id === userId);
-    if (!index) {
+    if (index === -1) {
       return res.status(404).send({ errors: { message: 'User not found.' } });
     }
 
