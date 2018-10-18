@@ -58,7 +58,7 @@ export default {
     const index = allUsers.findIndex(obj => obj.id === previousUser.id);
 
     allUsers.splice(index, 1, updatedUser);
-    res.status(200).send(allUsers);
+    res.status(200).send(updatedUser);
   },
 
   deleteUser(req, res) {

@@ -3,7 +3,7 @@ import { User } from '../../api/v1/models/usermodel';
 
 export const loginDetails = {
 	email: 'tomvee@gmail.com',
-	password: '012345'
+	password: '012345',
 }
 
 export const user1 = new User({
@@ -15,5 +15,12 @@ export const user1 = new User({
 	role: 'Attendant',
 });
 
+export const testMail = {
+	email: 'tommyv@gmail.com',
+}
 
-export const invalidId = null;
+export const invalidId = '1234';
+
+export const validId = 'd73febc3-a60d-433a-af20-9f4f89290c17';
+
+
