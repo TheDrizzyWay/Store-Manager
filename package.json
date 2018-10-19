@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Store Manager is a web application that helps store owners manage sales and product inventory records.",
   "main": "app.js",
+  "engines": {
+  "node": "8.12.0"
+  },
   "scripts": {
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./api -s",
