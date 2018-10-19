@@ -1,0 +1,33 @@
+5. uninstall some dependencies
+7. try real validation at the end
+12. fix moment timezone.
+13. comments where necessary
+16. codequality badge
+17. how to redirect
+18. test all endpoints
+set up coveralls
+a new branch for each feature
+
+        "firstName": "Carl",
+        "lastName": "Johnson",
+        "email": "cj@gmail.com",
+        "password": "678910",
+        "role": "attendant"
+
+"email": "tomvee@gmail.com",
+"password": "012345"
+
+"name": "x-series",
+"description": "Latest adidas x soccer boots."
+
+"name": "adidas f10",
+"quantitySold": "1"
+
+    "name": "adidas 10",
+    "imageUrl": "sample-image.com",
+    "price": "10000",
+    "quantity": "10",
+    "minQuantity": "3"
+
+https://safe-temple-72859.herokuapp.com/ | https://git.heroku.com/safe-temple-72859.git
+
