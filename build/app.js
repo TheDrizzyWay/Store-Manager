@@ -26,10 +26,16 @@ app.get('/', function (req, res) {
 });
 
 var port = process.env.PORT || 3000;
-// if (!module.parent) for test watch
-app.listen(port, function () {
-  return console.log('Server running on port ' + port);
-});
+/* for testing
+if (!module.parent) {
+	app.listen(port, () => console.log(`Server running on port ${port}`));
+}
+*/
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(process.env.PORT || 5000, function () {
+    return console.log('Server running on localhost:5000');
+  });
+}
 
 exports.default = app;
 //# sourceMappingURL=app.js.map

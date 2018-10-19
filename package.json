@@ -8,6 +8,7 @@
     "build-babel": "babel -d ./build ./api -s",
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./build/app.js",
+    "heroku-postbuild": "npm install",
     "test": "cross-env NODE_ENV=test nyc mocha --exit --require babel-core/register ./test/**/*.js",
     "devstart": "node_modules/.bin/nodemon api/app.js --exec babel-node --"
   },
