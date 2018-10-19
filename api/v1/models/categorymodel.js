@@ -12,7 +12,7 @@ export class Category {
   constructor(category) {
     this.id = uuid.v4();
     this.name = category.name ? category.name.toString() : null;
-    this.description = category.description ? category.description : null;
+    this.description = category.description.toString() ? category.description : null;
     this.dateCreated = moment();
   }
 }

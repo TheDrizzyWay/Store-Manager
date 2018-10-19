@@ -30,7 +30,7 @@ export default {
     const index = allProducts.findIndex(obj => obj.id === previousProduct.id);
 
     allProducts.splice(index, 1, updatedProduct);
-    res.status(200).send(allProducts);
+    res.status(200).send(updatedProduct);
   },
 
   deleteProduct(req, res) {

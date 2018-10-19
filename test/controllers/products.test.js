@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
-import { loginDetails, user1, invalidId, validId, testMail } from '../mockdata/usersdata';
+import { loginDetails, product1, invalidId, validId, testProd } from '../mockdata/productsdata';
 
 chai.use(chaiHttp);
 
@@ -24,23 +24,23 @@ afterEach((done) => {
     });
 });
 
-describe('Users', () => {
-  describe('POST /users - Create new user', () => {
-    it('should create a new user', (done) => {
+describe('Products', () => {
+  describe('POST /products - Create new product', () => {
+    it('should create a new product', (done) => {
       chai.request(app)
-        .post('/api/v1/users')
-        .send(user1)
+        .post('/api/v1/products')
+        .send(product1)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(201);
-          expect(res.body.firstName).equal('Carl');
+          expect(res.body.name).equal('adidas x');
           done();
         });
     });
 
-    it('should not create a user with invalid data', (done) => {
+    it('should not create a product with invalid data', (done) => {
       chai.request(app)
-        .post('/api/v1/users')
+        .post('/api/v1/products')
         .send({ a: 1 })
         .end((err, res) => {
           if (err) return done(err);
@@ -50,10 +50,10 @@ describe('Users', () => {
     });
   });
 
-  describe('GET /users - Get all users', () => {
-    it('should fetch all users', (done) => {
+  describe('GET /products - Get all products', () => {
+    it('should fetch all products', (done) => {
       chai.request(app)
-        .get('/api/v1/users')
+        .get('/api/v1/products')
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
@@ -63,10 +63,10 @@ describe('Users', () => {
     });
   });
 
-  describe('GET /users/:userId - Get user by id', () => {
-    it('should fetch a particular user', (done) => {
+  describe('GET /products/:productId - Get product by id', () => {
+    it('should fetch a particular product', (done) => {
       chai.request(app)
-        .get(`/api/v1/users/${validId}`)
+        .get(`/api/v1/products/${validId}`)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
@@ -77,7 +77,7 @@ describe('Users', () => {
 
     it('should return an error if id is invalid', (done) => {
       chai.request(app)
-        .get(`/api/v1/users/${invalidId}`)
+        .get(`/api/v1/products/${invalidId}`)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
@@ -86,26 +86,27 @@ describe('Users', () => {
         });
     });
   });
-  describe('PUT /users/:userId - Update a user', () => {
-    it('should update user information', (done) => {
+
+  describe('PUT /products/products - Update a product', () => {
+    it('should update product information', (done) => {
       chai.request(app)
-        .put(`/api/v1/users/${validId}`)
-        .send(testMail)
+        .put(`/api/v1/products/${validId}`)
+        .send(testProd)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
-          expect(res.body.email).equal('tommyv@gmail.com');
+          expect(res.body.price).equal('20000');
           done();
         });
     });
 
     it('should return an error if id is invalid', (done) => {
       chai.request(app)
-        .put(`/api/v1/users/${invalidId}`)
-        .send(testMail)
+        .put(`/api/v1/products/${invalidId}`)
+        .send(testProd)
         .end((err, res) => {
           if (err) return done(err);
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(404);
           expect(res.body).to.have.property('errors');
           done();
         });

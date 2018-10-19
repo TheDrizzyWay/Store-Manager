@@ -1,7 +1,15 @@
 import moment from 'moment';
 import uuid from 'uuid';
 
-export const allProducts = [];
+export const allProducts = [{
+  id: 'd7ce85ef-8b29-418d-b79f-3bb597a12c1e',
+  name: 'adidas f10',
+  imageUrl: 'sample-image.com',
+  price: '10000',
+  quantity: '10',
+  minQuantity: '3',
+  dateCreated: '2018-10-19T15:15:54.072Z',
+}];
 
 export class Product {
   constructor(product) {

@@ -30,7 +30,7 @@ export default {
     const index = allCategories.findIndex(obj => obj.id === previousCategory.id);
 
     allCategories.splice(index, 1, updatedCategory);
-    res.status(200).send(allCategories);
+    res.status(200).send(updatedCategory);
   },
 
   deleteCategory(req, res) {
