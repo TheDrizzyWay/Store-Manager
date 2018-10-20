@@ -11,6 +11,8 @@
     "build-babel": "babel -d ./build ./api -s",
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./build/app.js",
+    "coverage": "node node_modules/.bin/babel-istanbul cover _mocha -- -R spec",
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
     "test": "cross-env NODE_ENV=test nyc --require babel-core/register mocha -c --exit ./test/**/*.js",
     "devstart": "node_modules/.bin/nodemon api/app.js --exec babel-node --"
   },

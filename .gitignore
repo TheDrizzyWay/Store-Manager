@@ -1,4 +1,6 @@
 node_modules/
 .nyc_output/
 ptracker.txt/
-build
+build/
+coverage/
+.coveralls.yml
