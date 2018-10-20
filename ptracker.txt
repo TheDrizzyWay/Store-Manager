@@ -2,8 +2,6 @@
 7. try real validation at the end
 12. fix moment timezone.
 13. comments where necessary
-16. codequality badge
-17. how to redirect
 18. test all endpoints
 set up coveralls
 a new branch for each feature

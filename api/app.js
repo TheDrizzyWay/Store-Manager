@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-// for testing
+// for test watching
 // if (!module.parent) {
 app.listen(port, () => console.log(`Server running on port ${port}`));
 // }
