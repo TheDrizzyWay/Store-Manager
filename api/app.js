@@ -14,13 +14,9 @@ app.get('/', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-/* for testing
-if (!module.parent) {
-	app.listen(port, () => console.log(`Server running on port ${port}`));
-}
-*/
-if (process.env.NODE_ENV !== 'test') {
-  app.listen(process.env.PORT || 5000, () => console.log('Server running on localhost:5000'));
-}
+// for testing
+// if (!module.parent) {
+app.listen(port, () => console.log(`Server running on port ${port}`));
+// }
 
 export default app;
