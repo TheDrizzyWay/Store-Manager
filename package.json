@@ -11,9 +11,7 @@
     "build-babel": "babel -d ./build ./api -s",
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./build/app.js",
-    "test": "cross-env NODE_ENV=test nyc --require babel-core/register mocha -c --exit ./test/**/*.js",
-    "coverage": "cross-env NODE_ENV=test babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha",
-    "coveralls": "npm run coverage && cat coverage/lcov.info | coveralls",
+    "test": "nyc --reporter=text-summary mocha -c ./test/**/*.js --exit --require babel-core/register",
     "devstart": "node_modules/.bin/nodemon api/app.js --exec babel-node --"
   },
   "repository": {
