@@ -13,7 +13,7 @@ export default {
     if (productConfirm === undefined) {
       return res.status(400).send({ errors: { message: 'Product not found.' } });
     }
-    const productQuantitySold = req.body.quantitySold;
+    const productQuantitySold = parseInt(req.body.quantitySold, 10);
     if (productQuantitySold > productConfirm.quantity) {
       return res.status(422).send({ errors: { message: 'We do not have the requested quantity.' } });
     }

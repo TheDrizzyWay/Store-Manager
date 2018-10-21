@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
-import { loginDetails, invalidId, validId, saleOrder1 } from '../mockdata/salesdata';
+import { loginDetails, invalidId, validId, saleOrder1, saleOrder2 } from '../mockdata/salesdata';
 import { adminRole } from '../../api/v1/models/usermodel';
 
 chai.use(chaiHttp);
@@ -47,6 +47,19 @@ describe('Sales', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(400);
+          done();
+        });
+    });
+
+    it('should not create a sale order with excess quantity', (done) => {
+      adminRole.splice(0, 1);
+      chai.request(app)
+        .post('/api/v1/sales')
+        .send(saleOrder2)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(422);
+          expect(res.body).to.have.property('errors');
           done();
         });
     });

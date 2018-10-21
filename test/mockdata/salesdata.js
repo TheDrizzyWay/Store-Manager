@@ -15,3 +15,9 @@ export const saleOrder1 = new SaleOrder({
   name: 'adidas x',
   quantitySold: '1',
 });
+
+export const saleOrder2 = new SaleOrder({
+  id: uuid.v4(),
+  name: 'adidas x',
+  quantitySold: '20',
+});

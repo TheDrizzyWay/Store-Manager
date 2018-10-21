@@ -113,7 +113,7 @@ describe('Categories', () => {
     });
   });
 
-   describe('DELETE /categories/:categoryId - Delete a category', () => {
+  describe('DELETE /categories/:categoryId - Delete a category', () => {
     it('should delete a category', (done) => {
       chai.request(app)
         .del(`/api/v1/categories/${validId}`)

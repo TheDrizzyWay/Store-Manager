@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
-import { loginDetails, user1, invalidId, validId, testMail } from '../mockdata/usersdata';
+import { loginDetails, user1, user2, invalidId, validId, testMail, testMail2 } from '../mockdata/usersdata';
 
 chai.use(chaiHttp);
 
@@ -45,6 +45,18 @@ describe('Users', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(400);
+          done();
+        });
+    });
+
+    it('should not create a user with an already existing email', (done) => {
+      chai.request(app)
+        .post('/api/v1/users')
+        .send(user2)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(401);
+          expect(res.body).to.have.property('errors');
           done();
         });
     });
@@ -139,21 +151,52 @@ describe('Users', () => {
   describe('POST /users/login - Log in the user', () => {
     it('should log the user into his application account', (done) => {
       chai.request(app)
-        .post('/api/v1/users/login')
-        .send(loginDetails)
+        .get('/api/v1/users/logout')
         .end((err, res) => {
           if (err) return done(err);
-          expect(res).to.have.status(400);
+          chai.request(app)
+            .post('/api/v1/users/login')
+            .send(loginDetails);
+          expect(res).to.have.status(200);
           expect(res).to.be.a.json;
+          done();
+        });
+    });
+
+    it('should not log in a user with invalid details', (done) => {
+      chai.request(app)
+        .get('/api/v1/users/logout')
+        .end((err, res) => {
+          if (err) return done(err);
+          chai.request(app)
+            .post('/api/v1/users/login')
+            .send(testMail2)
+            .end((err, res) => {
+              if (err) return done(err);
+              expect(res).to.have.status(401);
+              expect(res.body).to.have.property('errors');
+              done();
+            });
+        });
+    });
+  });
+
+  describe('GET /users/logout - Log out the user', () => {
+    it('should log the user out of the application', (done) => {
+      chai.request(app)
+        .get('/api/v1/users/logout')
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(200);
           done();
         });
     });
   });
 
-  describe('POST /users/logout - Log out the user', () => {
-    it('should log the user out of the application', (done) => {
+  describe('GET / - Home Page', () => {
+    it('should take the user to the home page', (done) => {
       chai.request(app)
-        .get('/api/v1/users/logout')
+        .get('/')
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);

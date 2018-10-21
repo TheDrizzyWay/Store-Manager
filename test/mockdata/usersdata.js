@@ -15,8 +15,22 @@ export const user1 = new User({
   role: 'Attendant',
 });
 
+export const user2 = new User({
+  id: uuid.v4(),
+  firstName: 'Carl',
+  lastName: 'Johnson',
+  email: 'tomvee@gmail.com',
+  password: '123xyz',
+  role: 'Attendant',
+});
+
 export const testMail = {
   email: 'tonycee@gmail.com',
+};
+
+export const testMail2 = {
+  email: 'abc@yahoo.com',
+  password: 'abc123',
 };
 
 export const invalidId = '1234';
