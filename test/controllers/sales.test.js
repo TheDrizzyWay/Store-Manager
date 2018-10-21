@@ -1,7 +1,8 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
-import { loginDetails, invalidId, validId } from '../mockdata/salesdata';
+import { loginDetails, invalidId, validId, saleOrder1 } from '../mockdata/salesdata';
+import { adminRole } from '../../api/v1/models/usermodel';
 
 chai.use(chaiHttp);
 
@@ -25,6 +26,32 @@ afterEach((done) => {
 });
 
 describe('Sales', () => {
+  describe('POST /sales - Create new sale order', () => {
+    it('should create a new sale order', (done) => {
+      adminRole.splice(0, 1);
+      chai.request(app)
+        .post('/api/v1/sales')
+        .send(saleOrder1)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(201);
+          expect(res.body.name).equal('adidas x');
+          done();
+        });
+    });
+
+    it('should not create a sale order with invalid data', (done) => {
+      chai.request(app)
+        .post('/api/v1/sales')
+        .send({ a: 1 })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(400);
+          done();
+        });
+    });
+  });
+
   describe('GET /sales - Get all sales', () => {
     it('should fetch all sales records', (done) => {
       chai.request(app)

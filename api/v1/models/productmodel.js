@@ -9,6 +9,15 @@ export const allProducts = [{
   quantity: '10',
   minQuantity: '3',
   dateCreated: '2018-10-19T15:15:54.072Z',
+},
+{
+  id: '8d007a83-f1d9-461b-a9c0-e09b5be3ac9d',
+  name: 'adidas predator z10',
+  imageUrl: 'sample-image3.com',
+  price: '15500',
+  quantity: '10',
+  minQuantity: '3',
+  dateCreated: '2018-10-21T13:32:12.968Z',
 }];
 
 export class Product {

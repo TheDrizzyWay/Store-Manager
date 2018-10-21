@@ -4,5 +4,7 @@ node_js:
 cache:
   directories:
     - 'node_modules'
-script: - npm test
-after_success: - nyc report --reporter=text-lcov | coveralls
+script: 
+    - npm test
+after_success: 
+    - nyc report --reporter=text-lcov | coveralls

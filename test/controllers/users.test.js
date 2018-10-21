@@ -86,6 +86,7 @@ describe('Users', () => {
         });
     });
   });
+
   describe('PUT /users/:userId - Update a user', () => {
     it('should update user information', (done) => {
       chai.request(app)
@@ -94,7 +95,7 @@ describe('Users', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
-          expect(res.body.email).equal('tommyv@gmail.com');
+          expect(res.body.email).equal('tonycee@gmail.com');
           done();
         });
     });
@@ -105,8 +106,57 @@ describe('Users', () => {
         .send(testMail)
         .end((err, res) => {
           if (err) return done(err);
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(404);
           expect(res.body).to.have.property('errors');
+          done();
+        });
+    });
+  });
+
+  describe('DELETE /users/:userId - Delete a user', () => {
+    it('should delete a user', (done) => {
+      chai.request(app)
+        .del(`/api/v1/users/${validId}`)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(204);
+          done();
+        });
+    });
+
+    it('should return an error if id is invalid', (done) => {
+      chai.request(app)
+        .del(`/api/v1/users/${invalidId}`)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(404);
+          expect(res.body).to.have.property('errors');
+          done();
+        });
+    });
+  });
+
+  describe('POST /users/login - Log in the user', () => {
+    it('should log the user into his application account', (done) => {
+      chai.request(app)
+        .post('/api/v1/users/login')
+        .send(loginDetails)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(400);
+          expect(res).to.be.a.json;
+          done();
+        });
+    });
+  });
+
+  describe('POST /users/logout - Log out the user', () => {
+    it('should log the user out of the application', (done) => {
+      chai.request(app)
+        .get('/api/v1/users/logout')
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(200);
           done();
         });
     });

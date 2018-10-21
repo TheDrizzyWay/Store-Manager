@@ -9,7 +9,17 @@ export const allUsers = [{
   password: '012345',
   role: 'admin',
   dateCreated: '2018-10-18T19:37:49.217Z',
+},
+{
+  id: '99582984-0988-4d3e-a899-d027ca46dac5',
+  firstName: 'Toni',
+  lastName: 'Ciprianni',
+  email: 'tonyc@gmail.com',
+  password: 'abc123',
+  role: 'attendant',
+  dateCreated: '2018-10-20T22:38:56.271Z',
 }];
+
 export const loggedIn = [];
 export const adminRole = [];
 

@@ -11,7 +11,7 @@ export default {
     const productForSale = req.body.name;
     const productConfirm = allProducts.find(obj => obj.name === productForSale);
     if (productConfirm === undefined) {
-      return res.status(404).send({ errors: { message: 'Product not found.' } });
+      return res.status(400).send({ errors: { message: 'Product not found.' } });
     }
     const productQuantitySold = req.body.quantitySold;
     if (productQuantitySold > productConfirm.quantity) {

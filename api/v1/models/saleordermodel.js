@@ -7,7 +7,7 @@ export const allSales = [{
   quantitySold: '1',
   dateCreated: '2018-10-19T15:57:18.377Z',
   total: '10000',
-  seller: '3b51217f-d37b-464c-8d10-37dfc66df4cf',
+  seller: '99582984-0988-4d3e-a899-d027ca46dac5',
 }];
 
 export class SaleOrder {

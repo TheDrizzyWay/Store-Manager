@@ -112,4 +112,27 @@ describe('Categories', () => {
         });
     });
   });
+
+   describe('DELETE /categories/:categoryId - Delete a category', () => {
+    it('should delete a category', (done) => {
+      chai.request(app)
+        .del(`/api/v1/categories/${validId}`)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(204);
+          done();
+        });
+    });
+
+    it('should return an error if id is invalid', (done) => {
+      chai.request(app)
+        .del(`/api/v1/categories/${invalidId}`)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(404);
+          expect(res.body).to.have.property('errors');
+          done();
+        });
+    });
+  });
 });
