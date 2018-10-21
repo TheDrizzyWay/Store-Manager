@@ -4,7 +4,6 @@ node_js:
 cache:
   directories:
     - 'node_modules'
-<<<<<<< HEAD
 script:
     - npm test
 after_success:
