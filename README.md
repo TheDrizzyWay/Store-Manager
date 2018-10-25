@@ -5,7 +5,7 @@ Store Manager is a web application that helps store owners manage sales and prod
 
 ## Store Manager API
 
-Version 1 (v1) of the Fast-Food-Fast API is hosted on Heroku at: `https://safe-temple-72859.herokuapp.com/api/v1` and has the following endpoints.
+Version 1 (v1) of the Fast-Food-Fast API is hosted on Heroku at: `[https://safe-temple-72859.herokuapp.com/api/v1](https://safe-temple-72859.herokuapp.com/api/v1)` and has the following endpoints;
 
 ### Users Endpoints
 
@@ -28,4 +28,14 @@ Version 1 (v1) of the Fast-Food-Fast API is hosted on Heroku at: `https://safe-t
 | /api/v1/products/:productId    | DELETE         |  productId  |
 
 
-More Updates Coming...
+### Sales Endpoints
+
+| Endpoint                 | Request Method | Parameters  |
+| ------------------------ |:--------------:| :----------:|
+| /api/v1/sales            | GET            |             |
+| /api/v1/sales/:saleId    | GET            |   saleId    |
+| /api/v1/users            | POST           |             |
+
+##Project Management
+
+This project is managed with Pivotal Tracker and can be found [here](https://www.pivotaltracker.com/n/projects/2203166)
