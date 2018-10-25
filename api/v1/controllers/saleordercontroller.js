@@ -37,7 +37,7 @@ export default {
       const saleId = req.params.saleId;
       const saleOrder = allSales.find(obj => obj.id === saleId);
       if (saleOrder === undefined) {
-        res.status(404).send({ success: false, message: 'Sale record not found.' });
+        return res.status(404).send({ success: false, message: 'Sale record not found.' });
       }
       res.status(200).send({ success: true, message: 'Sale record found.', data: saleOrder });
     } else {
@@ -48,9 +48,9 @@ export default {
       const sellerId = seller.id;
       const saleOrder = allSales.find(obj => obj.id === saleId && obj.seller === sellerId);
       if (saleOrder === undefined) {
-        res.status(404).send({ success: false, message: 'Sale record not found.' });
+        return res.status(404).send({ success: false, message: 'Sale record not found.' });
       }
-      res.status(200).send({ success: true, message: 'Sale record found.', data: saleOrder });
+      return res.status(200).send({ success: true, message: 'Sale record found.', data: saleOrder });
     }
   },
 };

@@ -15,9 +15,9 @@ export default {
     const categoryId = req.params.categoryId;
     const category = allCategories.find(obj => obj.id === categoryId);
     if (category === undefined) {
-      res.status(404).send({ success: false, message: 'Category not found.' });
+      return res.status(404).send({ success: false, message: 'Category not found.' });
     }
-    res.status(200).send({ success: true, message: 'Category found.', data: category });
+    return res.status(200).send({ success: true, message: 'Category found.', data: category });
   },
 
   updateCategory(req, res) {
