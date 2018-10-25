@@ -33,7 +33,7 @@ describe('Users', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(201);
-          expect(res.body.firstName).equal('Carl');
+          expect(res.body.data.firstName).equal('Carl');
           done();
         });
     });
@@ -56,7 +56,7 @@ describe('Users', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(401);
-          expect(res.body).to.have.property('errors');
+          expect(res).to.be.a.json;
           done();
         });
     });
@@ -93,7 +93,7 @@ describe('Users', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
-          expect(res.body).to.have.property('errors');
+          expect(res).to.be.a.json;
           done();
         });
     });
@@ -107,7 +107,7 @@ describe('Users', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
-          expect(res.body.email).equal('tonycee@gmail.com');
+          expect(res.body.data.email).equal('tonycee@gmail.com');
           done();
         });
     });
@@ -119,7 +119,7 @@ describe('Users', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
-          expect(res.body).to.have.property('errors');
+          expect(res).to.be.a.json;
           done();
         });
     });
@@ -142,7 +142,7 @@ describe('Users', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
-          expect(res.body).to.have.property('errors');
+          expect(res).to.be.a.json;
           done();
         });
     });
@@ -174,7 +174,7 @@ describe('Users', () => {
             .end((err, res) => {
               if (err) return done(err);
               expect(res).to.have.status(401);
-              expect(res.body).to.have.property('errors');
+              expect(res).to.be.a.json;
               done();
             });
         });

@@ -4,7 +4,8 @@
 }
 
 body {
-	background-color: #dc143c;
+	background: url("../images/457522-widescreen.jpg");
+  background-size: cover;
 	width: 100%;
 	height: 100%;
 }
@@ -13,9 +14,9 @@ body {
 }
 
 header {
-	background: url("../images/unsplashphoto81101.jpg");
+	background: url("../images/photo-1519.jpg");
 	width: 100%;
-	height: 250px;
+	height: 300px;
 	text-align: center;
 	background-size: cover;
   background-attachment: fixed;
@@ -34,9 +35,9 @@ header {
 h1 {
 	font-family: 'Tahoma', sans-serif;
 	font-weight: bolder;
-	margin-top: 20px;
+	margin-top: 50px;
 	margin-bottom: 30px;
-	color: #ffffff;
+	color: #fffaf0;
 	text-shadow: 1px 1px 1px #333333;
 }
 
@@ -45,24 +46,27 @@ h3 {
 	font-style: italic;
 	font-weight: bold;
 	margin-bottom: 30px;
-	color: #ffffff;
+	color: #fffaf0;
 	text-shadow: 1px 1px 1px #333333;
 }
 
 form {
   background: white;
-  width: 100%;
+  width: 50%;
+  float: center;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
   font-family: 'lato', sans-serif;
   position: relative;
-  color: #333333;
+  color: #4169e1;
   border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 form p {
-  background: #FF3838;
+  background: #00DED1;
   padding: 30px 20px;
-  color: white;
+  color: #ffffff;
   font-size: 1.2em;
   font-weight: 600;
   border-radius: 10px 10px 0 0;
@@ -80,37 +84,38 @@ form label span {
   color: #FF3838;
   font-size: 2em;
   position: absolute;
-  left: 2.3em;
-  top: -10px;
+  left: 2.0em;
+  top: -30px;
 }
 
 form input {
   display: block;
-  width: 90%;
+  width: 80%;
   margin-left: 20px;
   padding: 5px 20px;
   font-size: 1em;
   border-radius: 3px;
   outline: none;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
 }
 
 form .help {
   margin-left: 20px;
   font-size: 0.8em;
-  color: #777;
+  color: #777777;
 }
 
 form button {
+  display: grid;
   position: relative;
-  width: 150px;
+  width: 20%;
   margin-top: 30px;
   margin-bottom: 30px;
-  left: 50%;
-  transform: translate(-50%, 0);
+  margin-left: auto;
+  margin-right: auto;
   font-family: inherit;
   color: white;
-  background: #FF3838;
+  background: #4169e1;
   outline: none;
   border: none;
   padding: 5px 15px;
@@ -123,23 +128,25 @@ form button {
 }
 
 form button:hover {
-  background: #dc143c;
+  background: #00ded1;
+
 }
 
 footer {
 	text-align: center;
-	color: #ffffff;
-	font-size: 20px;
+	color: #4169e1;
+	font-size: 25px;
 	margin-top: 10px;
 }
 
-#check1 {
-  text-decoration: none;
-  color: #dc143c;
-  background-color: #ffffff;
+span {
+  padding: 20px;
 }
 
-#check1:hover {
-  color: #ffffff;
-  background-color: #ff0000;
+#forgot {
+  text-decoration: none;
+}
+
+#forgot:hover {
+  background-color: #00ded1;
 }

@@ -9,7 +9,7 @@ export default (req, res, next) => {
     errors.password = 'User password is required';
   }
   if (Object.keys(errors).length !== 0) {
-    return res.status(400).send({ errors });
+    return res.status(400).send({ success: false, errors });
   }
   next();
 };

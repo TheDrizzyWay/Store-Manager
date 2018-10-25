@@ -33,7 +33,7 @@ describe('Products', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(201);
-          expect(res.body.name).equal('adidas x');
+          expect(res.body.data.name).equal('adidas x');
           done();
         });
     });
@@ -81,7 +81,7 @@ describe('Products', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
-          expect(res.body).to.have.property('errors');
+          expect(res).to.be.a.json;
           done();
         });
     });
@@ -95,7 +95,7 @@ describe('Products', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
-          expect(res.body.price).equal('20000');
+          expect(res.body.data.price).equal('20000');
           done();
         });
     });
@@ -107,7 +107,7 @@ describe('Products', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
-          expect(res.body).to.have.property('errors');
+          expect(res).to.be.a.json;
           done();
         });
     });
@@ -130,7 +130,7 @@ describe('Products', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
-          expect(res.body).to.have.property('errors');
+          expect(res).to.be.a.json;
           done();
         });
     });

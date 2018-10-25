@@ -35,12 +35,13 @@ describe('Sales', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(201);
-          expect(res.body.name).equal('adidas x');
+          expect(res.body.data.name).equal('adidas x');
           done();
         });
     });
 
     it('should not create a sale order with invalid data', (done) => {
+      adminRole.splice(0, 1);
       chai.request(app)
         .post('/api/v1/sales')
         .send({ a: 1 })
@@ -59,7 +60,7 @@ describe('Sales', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(422);
-          expect(res.body).to.have.property('errors');
+          expect(res).to.be.a.json;
           done();
         });
     });
@@ -96,7 +97,7 @@ describe('Sales', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
-          expect(res.body).to.have.property('errors');
+          expect(res).to.be.a.json;
           done();
         });
     });
