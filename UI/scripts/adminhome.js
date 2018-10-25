@@ -15,14 +15,6 @@ function showResult(e) {
 			<li>Sample product 3<a href="adminview.html" class="view">View Details</a></li><br>
 		</ol>`;
 		return;
-	} else if (selected == "product categories") {
-		resultDiv.className = "resultDiv";
-		resultDiv.innerHTML =`<ol>
-			<li>Sample category 1</li><br>
-			<li>Sample category 2</li><br>
-			<li>Sample category 3</li><br>
-		</ol>`;
-		return; 
 	} else {
 		resultDiv.className = "resultDiv";
 		resultDiv.innerHTML =`<ol>

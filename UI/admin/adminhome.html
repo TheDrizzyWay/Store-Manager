@@ -14,25 +14,35 @@
 		<header>
 			<div class="headerDiv">
 				<h1>Store Manager</h1>
-				<h3>Hello Admin.</h3>
+				<h3>Hi Admin. You can view all products<br>
+					and sales here.
+				</h3>
 			</div>
 		</header>
 	</div>
-	<div class="wrapper">
-		<nav class="navbar">
-			<ul class=navbarList>
-				<li><div class="menuBall"><a href="adminview.html" class="ball">VIEW PRODUCTS</a></div></li><br>
-				<li><div class="menuBall" id="edit"><a href="#" class="ball">EDIT PRODUCTS</a></div></li><br>
-				<li><div class="menuBall" id="create"><a href="#" class="ball">CREATE</a></div></li><br>
-				<li><div class="menuBall"><a href="adminrecord.html" class="ball">RECORDS</a></div></li><br>
-			</ul>
-		</nav>
-	<div id="resultDivOne">
+	<div class="link-container">
+	<form id="selectForm">
+		<select name="select" class="select">
+			<option>Products</option>
+			<option>Store Attendants</option>
+		</select>
+		<button type="submit" class="submit">Search</button>
+	</form>
+	<nav class="navbar">
+		<ul class=navbarList>
+			<li><a href="adminedit.html">EDIT</a></li>
+			<li><a href="admincreate.html">CREATE</a></li>
+		</ul>
+	</nav>
+	</div>
+	<div id="resultDiv">
 	</div>
 	<footer>
-		<button>Logout</button>
+		<div class="logout">
+  			<a href="../index.html" class="logout-button"><span class="logout-text">Logout</span></a>
+		</div><br>
 		<p>Powered by TheDrizzyWay &#169; 2018</p>
 	</footer>
-	<script type="text/javascript" src="../scripts/adminedit.js"></script>
+	<script src="../scripts/adminhome.js"></script>
 </body>
 </html>

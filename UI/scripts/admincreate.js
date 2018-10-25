@@ -1,15 +1,15 @@
 "use strict"
 
 const myForm = document.getElementById("selectForm");
-let resultDiv = document.getElementById("resultDiv");
+let resultDiv2 = document.getElementById("resultDiv2");
 myForm.addEventListener("submit", showResult);
 
 function showResult(e) {
 	e.preventDefault();
 	let selected = document.querySelector("select").value.toLowerCase();
 	if (selected == "new product") {
-		resultDiv.className = "resultDiv";
-		resultDiv.innerHTML =`<form class="resultform">
+		resultDiv2.className = "resultDiv2";
+		resultDiv2.innerHTML =`<form class="resultform">
   								<p>Create New Product</p>
   								<label>Product Name</label>
   								<input/>
@@ -24,24 +24,13 @@ function showResult(e) {
   								<label>Product Quantity</label>
   								<input/>
   								<label>Product Minimum Stock</label>
-  								<input/>
+  								<input/><br>
   								<button>Confirm</button>
 							</form>`;
 		return;
-	} else if (selected == "new category") {
-		resultDiv.className = "resultDiv";
-		resultDiv.innerHTML =`<form class="resultform">
-  								<p>Create New Category</p>
-  								<label>Category Name</label>
-  								<input/>
-  								<label>Category Description</label>
-  								<input/>
-  								<button>Confirm</button>
-							</form>`;
-		return; 
 	} else {
-		resultDiv.className = "resultDiv";
-		resultDiv.innerHTML =`<form class="resultform">
+		resultDiv2.className = "resultDiv2";
+		resultDiv2.innerHTML =`<form class="resultform">
   								<p>Create New Account</p>
   								<label>Name</label>
   								<input/>
@@ -50,7 +39,7 @@ function showResult(e) {
   								<label>Username</label>
   								<input/>
   								<label>Default Password</label>
-  								<input/>
+  								<input/><br>
   								<button>Confirm</button>
 							</form>`;
 		return; 

@@ -20,27 +20,30 @@
 			</div>
 		</header>
 	</div>
-	<nav class="navbar">
-		<ul class=navbarList>
-			<li><a href="#">ATTENDANT-HOME</a></li>
-			<li><a href="saleorder.html">SALE ORDER</a></li>
-			<li><a href="profile.html">PROFILE</a></li>
-			<li><a href="../index.html">LOGOUT</a></li>
-		</ul>
-	</nav>
 	<div></div>
-	<form id="selectForm">
-		<select name="select" class="select">
-			<option>Products</option>
-			<option>Product Categories</option>
-		</select>
-		<button type="submit" class="submit">Search</button>
-	</form>
+	<div class="link-container">
+		<form id="selectForm">
+			<select name="select" class="select">
+				<option>Products</option>
+				<option>Product Categories</option>
+			</select>
+			<button type="submit" class="submit">Search</button>
+		</form>
+		<nav class="navbar">
+			<ul class=navbarList>
+				<li><a href="saleorder.html">SALE ORDER</a></li>
+				<li><a href="profile.html">PROFILE</a></li>
+			</ul>
+		</nav>
+	</div>
 	<div id="resultDiv">
 	</div>
 	<footer>
+		<div class="logout">
+  			<a href="../index.html" class="logout-button"><span class="logout-text">Logout</span></a>
+		</div><br>
 		<p>Powered by TheDrizzyWay &#169; 2018</p>
 	</footer>
-	<script type="text/javascript" src="../javascripts/attendanthome.js"></script>
+	<script type="text/javascript" src="../scripts/attendanthome.js"></script>
 </body>
 </html>

@@ -4,22 +4,18 @@
 }
 
 body {
-	background-color: #dc143c;
+	background: url("../images/457522-widescreen.jpg");
+	background-size: cover;
 	width: 100%;
 	height: 100%;
 	font-family: 'Tahoma', serif;
 }
 
 header {
-	background: url("../images/unsplashphoto81101.jpg");
 	width: 100%;
 	height: 200px;
 	text-align: center;
-	background-size: cover;
-	background-attachment: fixed;
 	position: relative;
-	overflow: hidden;
-	border-radius: 0 0 90% 90% / 30%;
 }
 
 .headerdiv {
@@ -34,7 +30,7 @@ h1 {
 	font-weight: bolder;
 	margin-top: 20px;
 	margin-bottom: 30px;
-	color: #ffffff;
+	color: #4169e1;
 	text-shadow: 1px 1px 1px #333333;
 	text-align: center;
 }
@@ -44,14 +40,14 @@ h3 {
 	font-style: italic;
 	font-weight: bold;
 	margin-bottom: 30px;
-	color: #ffffff;
+	color: #00ded1;
 	text-shadow: 1px 1px 1px #333333;
 }
 
 footer {
 	text-align: center;
-	color: #ffffff;
-	font-size: 20px;
+	color: #4169e1;
+	font-size: 25px;
 	margin-top: 120px;
 }
 
@@ -87,14 +83,14 @@ footer {
 #savebutton {
     display: block;
     position: relative;
-    background-color: #ff3838;
+    background-color: #00ded1;
     margin: 0 auto 4em;
     margin-top: 10px;
     width: 300px;
     height: 40px;
     padding: 15px 0 5px;
     padding-top: 10px;
-    border-bottom: 4px solid #bc2525;
+    border-bottom: 4px solid #4169e1;
     text-align: center;
     color: #ffffff;
 }
@@ -175,25 +171,25 @@ textarea:focus {
 }
 
 .records div {
-	background-color: #ffffff;
+	background-color: #fffaf0;
 	padding-top: 10px;
 }
 
 .records div:nth-child(odd) {
-	background-color: #ff3838;
+	background-color: #4169e1;
 	color: #ffffff;
 	padding-top: 10px;
 }
 
 #check1 {
   text-decoration: none;
-  color: #dc143c;
-  background-color: #ffffff;
+  color: #4169e1;
+  background-color: #fffaf0;
 }
 
 #check1:hover {
   color: #ffffff;
-  background-color: #ff0000;
+  background-color: #00ded1;
 }
 
 .adminrecords {
@@ -204,12 +200,50 @@ textarea:focus {
 }
 
 .adminrecords div {
-	background-color: #ffffff;
+	background-color: #fffaf0;
 	padding-top: 10px;
 }
 
 .adminrecords div:nth-child(odd) {
-	background-color: #ff3838;
+	background-color: #4169e1;
 	color: #ffffff;
 	padding-top: 10px;
+}
+
+.logout {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    margin-bottom: 20px;
+    display: inline-block;
+    float: left;
+    padding-bottom: 20px;
+}
+
+.logout-button {
+    position:absolute;
+    background-color: #2f4f4f;
+    width:100%;
+    height:100%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px dashed #fff;
+    text-decoration: none;
+}
+
+.logout-text {
+    font-family: Verdana, Helvetica, Sans-Serif;
+    font-size: 20px;
+    color: #ffffff;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    top: 40%;
+}
+
+.logout-text:hover {
+	color: #00ded1;
 }
