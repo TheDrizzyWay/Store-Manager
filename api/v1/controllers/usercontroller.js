@@ -1,7 +1,7 @@
 import { allUsers, loggedIn, adminRole, User } from '../models/usermodel';
 
 export default {
-  createUser(req, res) {
+  createUser: (req, res) => {
     const userEmail = req.body.email;
     const emailExists = allUsers.find(obj => obj.email === userEmail);
     if (emailExists !== undefined) {
@@ -12,7 +12,7 @@ export default {
     return res.status(201).send({ success: true, data: user });
   },
 
-  loginUser(req, res) {
+  loginUser: (req, res) => {
     if (loggedIn.length === 1) {
       return res.status(400).send({ success: false, message: 'You are already logged in.' });
     }
@@ -29,17 +29,17 @@ export default {
     return res.status(200).send({ success: true, message: 'You are logged in' });
   },
 
-  logoutUser(req, res) {
+  logoutUser: (req, res) => {
     loggedIn.splice(0, 1);
     adminRole.splice(0, 1);
     return res.status(200).send({ success: true, message: 'You have logged out successfully.' });
   },
 
-  findAllUsers(req, res) {
+  findAllUsers: (req, res) => {
     return res.status(200).send({ success: true, message: 'Users found.', data: allUsers });
   },
 
-  findUserById(req, res) {
+  findUserById: (req, res) => {
     const userId = req.params.userId;
     const user = allUsers.find(obj => obj.id === userId);
     if (user === undefined) {
@@ -48,7 +48,7 @@ export default {
     return res.status(200).send({ success: true, message: 'User found', data: user });
   },
 
-  updateUser(req, res) {
+  updateUser: (req, res) => {
     const userId = req.params.userId;
     const previousUser = allUsers.find(obj => obj.id === userId);
     if (previousUser === undefined) {
@@ -61,7 +61,7 @@ export default {
     return res.status(200).send({ success: true, message: 'User information updated.', data: updatedUser });
   },
 
-  deleteUser(req, res) {
+  deleteUser: (req, res) => {
     const userId = req.params.userId;
     const index = allUsers.findIndex(obj => obj.id === userId);
     if (index === -1) {

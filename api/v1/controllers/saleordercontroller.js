@@ -3,7 +3,7 @@ import { allProducts } from '../models/productmodel';
 import { allUsers, loggedIn, adminRole } from '../models/usermodel';
 
 export default {
-  createSaleOrder(req, res) {
+  createSaleOrder: (req, res) => {
     const saleOrder = new SaleOrder(req.body);
     const productForSale = req.body.name;
     const productConfirm = allProducts.find(obj => obj.name === productForSale);
@@ -28,11 +28,11 @@ export default {
     return res.status(201).send({ success: true, message: 'Transaction completed.', data: saleOrder });
   },
 
-  findAllSales(req, res) {
+  findAllSales: (req, res) => {
     res.status(200).send({ success: true, message: 'All sale records found.', data: allSales });
   },
 
-  findSaleById(req, res) {
+  findSaleById: (req, res) => {
     if (adminRole.length > 0) {
       const saleId = req.params.saleId;
       const saleOrder = allSales.find(obj => obj.id === saleId);

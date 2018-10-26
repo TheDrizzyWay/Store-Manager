@@ -1,17 +1,17 @@
 import { allProducts, Product } from '../models/productmodel';
 
 export default {
-  createProduct(req, res) {
+  createProduct: (req, res) => {
     const product = new Product(req.body);
     allProducts.push(product);
     res.status(201).send({ success: true, message: 'Product created.', data: product });
   },
 
-  findAllProducts(req, res) {
+  findAllProducts: (req, res) => {
     res.status(200).send({ success: true, message: 'Product found.', data: allProducts });
   },
 
-  findProductById(req, res) {
+  findProductById: (req, res) => {
     const productId = req.params.productId;
     const product = allProducts.find(obj => obj.id === productId);
     if (product === undefined) {
@@ -20,7 +20,7 @@ export default {
     return res.status(200).send({ success: true, message: 'Sale record found.', data: product });
   },
 
-  updateProduct(req, res) {
+  updateProduct: (req, res) => {
     const productId = req.params.productId;
     const previousProduct = allProducts.find(obj => obj.id === productId);
     if (previousProduct === undefined) {
@@ -33,7 +33,7 @@ export default {
     return res.status(200).send({ success: true, data: updatedProduct });
   },
 
-  deleteProduct(req, res) {
+  deleteProduct: (req, res) => {
     const productId = req.params.productId;
     const index = allProducts.findIndex(obj => obj.id === productId);
     if (index === -1) {

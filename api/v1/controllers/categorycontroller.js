@@ -1,17 +1,17 @@
 import { allCategories, Category } from '../models/categorymodel';
 
 export default {
-  createCategory(req, res) {
+  createCategory: (req, res) => {
     const category = new Category(req.body);
     allCategories.push(category);
     res.status(201).send({ success: true, message: 'Product created.', data: category });
   },
 
-  findAllCategories(req, res) {
+  findAllCategories: (req, res) => {
     res.status(200).send({ success: true, message: 'All products found.', data: allCategories });
   },
 
-  findCategoryById(req, res) {
+  findCategoryById: (req, res) => {
     const categoryId = req.params.categoryId;
     const category = allCategories.find(obj => obj.id === categoryId);
     if (category === undefined) {
@@ -20,7 +20,7 @@ export default {
     return res.status(200).send({ success: true, message: 'Category found.', data: category });
   },
 
-  updateCategory(req, res) {
+  updateCategory: (req, res) => {
     const categoryId = req.params.categoryId;
     const previousCategory = allCategories.find(obj => obj.id === categoryId);
     if (previousCategory === undefined) {
@@ -33,7 +33,7 @@ export default {
     return res.status(200).send({ success: true, message: 'Category updated.', data: updatedCategory });
   },
 
-  deleteCategory(req, res) {
+  deleteCategory: (req, res) => {
     const categoryId = req.params.categoryId;
     const index = allCategories.findIndex(obj => obj.id === categoryId);
     if (index === -1) {
