@@ -38,3 +38,7 @@ Version 1 (v1) of the Fast-Food-Fast API is hosted on Heroku at: [https://safe-t
 
 ### Project Management
 This project is managed with Pivotal Tracker and can be found [here](https://www.pivotaltracker.com/n/projects/2203166)
+
+### Admin Login Details
+"email": "tomvee@gmail.com",
+"password": "012345"

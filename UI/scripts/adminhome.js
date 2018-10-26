@@ -10,9 +10,9 @@ function showResult(e) {
 	if (selected == "products") {
 		resultDiv.className = "resultDiv";
 		resultDiv.innerHTML =`<ol>
-			<li>Sample product 1<a href="adminview.html" class="view">View Details</a></li><br>
-			<li>Sample product 2<a href="adminview.html" class="view">View Details</a></li><br>
-			<li>Sample product 3<a href="adminview.html" class="view">View Details</a></li><br>
+			<li>Sample product 1<a href="adminview.html" class="view">View </a></li><br>
+			<li>Sample product 2<a href="adminview.html" class="view">View </a></li><br>
+			<li>Sample product 3<a href="adminview.html" class="view">View </a></li><br>
 		</ol>`;
 		return;
 	} else {
