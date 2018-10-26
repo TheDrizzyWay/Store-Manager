@@ -12,11 +12,12 @@ Version 1 (v1) of the Fast-Food-Fast API is hosted on Heroku at: [https://safe-t
 | Endpoint                 | Request Method | Parameters  |
 | ------------------------ |:--------------:| :----------:|
 | /api/v1/users            | GET            |             |
-| /api/v1/users/:userId    | GET            |   userId    |
+| /api/v1/users/:userId    | GET            |  userId     |
 | /api/v1/users            | POST           |             |
-| /api/v1/users/:userId    | PUT            |   userId    |
-| /api/v1/users/:userId    | DELETE         |  userId     |
-
+| /api/v1/users/:userId    | PUT            |  userId     |
+| /api/v1/users/:userId    | DELETE         |  userId     |                          
+| /api/v1/users/login      | POST           |             |
+| /api/v1/users/logout     | GET            |             |
 ### Product Endpoints
 
 | Endpoint                       | Request Method | Parameters  |
