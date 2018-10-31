@@ -70,7 +70,7 @@ export default class ProductController {
       name: pName, price: pPrice, quantity: pQuantity, minimumQuantity: pMinimumQuantity, imgUrl: pImgUrl, id,
     } = req.product;
     const {
-      name, price, quantity, minimumQuantity, imgUrl
+      name, price, quantity, minimumQuantity, imgUrl,
     } = req.body || {};
 
     try {

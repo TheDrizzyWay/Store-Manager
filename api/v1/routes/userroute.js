@@ -29,7 +29,6 @@ router.post('/signup', adminAuth, userController.createAccount);
 router.post('/login', userController.logIn);
 router.get('/users', authenticate, adminAuth, userController.getAllUsers);
 router.get('/users/:id', authenticate, adminAuth, checkUserId, userController.getUserById);
-router.put('/users/:id', authenticate, adminAuth, checkUserId, userController.updateUser);
 router.delete('/users/:id', authenticate, adminAuth, checkUserId, userController.deleteUser);
 
 export default router;

@@ -105,26 +105,6 @@ export default class UserController {
     }
   }
 
-  static async updateUser(req, res) {
-    const {
-      firstName: uFirstName, lastName: uLastName, email: uEmail, password: uPassword, id,
-    } = req.user;
-    const {
-      firstName, lastName, email, password,
-    } = req.body || {};
-
-    try {
-      await database.query(
-        'UPDATE users SET firstName = $1, lastName = $2, email = $3, password = $4 WHERE id = $5',
-        [firstName || uFirstName, lastName || uLastName, email || uEmail, password || uPassword, id],
-      );
-
-      res.status(200).send({ message: 'User details updated successfully' });
-    } catch ({ message }) {
-      res.status(500).send({ error: { message } });
-    }
-  }
-
   static async deleteUser(req, res) {
     const { id } = req.user;
     try {
