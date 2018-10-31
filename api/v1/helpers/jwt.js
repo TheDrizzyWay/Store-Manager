@@ -6,7 +6,7 @@ const { JWT_SECRET } = process.env;
 
 export default class JWT {
   static generateToken(payload) {
-    return new Promise((resolve, reject) => jwt.sign(payload, JWT_SECRET, { expiresIn: '3d' }, (err, token) => {
+    return new Promise((resolve, reject) => jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' }, (err, token) => {
       if (err) return reject();
       return resolve(token);
     }));

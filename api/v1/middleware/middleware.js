@@ -11,7 +11,7 @@ export const authenticate = async (req, res, next) => {
 
   try {
     const { id } = await jwt.verifyToken(token);
-    const result = await database.query('SELECT id, email, is_admin FROM users WHERE id = $1', [id]);
+    const result = await database.query('SELECT id, email, isAdmin FROM users WHERE id = $1', [id]);
 
     if (result.rowCount <= 0) {
       res.status(401).send({ error: { message: 'Unauthorized' } });
@@ -27,7 +27,7 @@ export const authenticate = async (req, res, next) => {
 
 export const attendantAuth = (req, res, next) => {
   const user = Object.assign({}, req.user);
-  if (user && !user.is_admin) {
+  if (user && !user.isAdmin) {
     return next();
   }
   return res.status(401).send({ error: { message: 'Unauthorized' } });
@@ -35,7 +35,7 @@ export const attendantAuth = (req, res, next) => {
 
 export const adminAuth = (req, res, next) => {
   const user = Object.assign({}, req.user);
-  if (user && user.is_admin) {
+  if (user && user.isAdmin) {
     return next();
   }
   return res.status(401).send({ error: { message: 'Unauthorized' } });

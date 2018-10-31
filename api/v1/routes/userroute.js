@@ -14,7 +14,7 @@ router.param('id', async (req, res, next, id) => {
     }
 
     const user = result.rows[0];
-    if (!user.is_admin) {
+    if (!user.isAdmin) {
       res.status(403).send({ error: { message: 'Unauthorized' } });
       return;
     }
@@ -29,5 +29,7 @@ router.post('/signup', adminAuth, userController.createAccount);
 router.post('/login', userController.logIn);
 router.get('/users', authenticate, adminAuth, userController.getAllUsers);
 router.get('/users/:id', authenticate, adminAuth, userController.getUserById);
+router.put('/users/:id', authenticate, adminAuth, userController.updateUser);
+router.delete('/users/:id', authenticate, adminAuth, userController.deleteUser);
 
 export default router;

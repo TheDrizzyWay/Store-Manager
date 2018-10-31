@@ -38,11 +38,11 @@ export default class UserController {
       result = await database.query(
         `INSERT INTO users 
       (
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         email,
         password,
-        is_admin)
+        isAdmin)
         VALUES
         ($1, $2, $3, $4, $5)
       `,
@@ -100,6 +100,36 @@ export default class UserController {
     try {
       const result = await database.query('SELECT * FROM users WHERE id = $1', [id]);
       res.send(result.rows[0]);
+    } catch ({ message }) {
+      res.status(500).send({ error: { message } });
+    }
+  }
+
+  static async updateUser(req, res) {
+    const {
+      firstName: ufirstName, lastName: ulastName, email: uEmail, password: uPassword, id,
+    } = req.user;
+    const {
+      firstName, lastName, email, password,
+    } = req.body || {};
+
+    try {
+      await database.query(
+        'UPDATE users SET firstName = $1, lastName = $2, email = $3, password = $4 WHERE id = $5',
+        [firstName || ufirstName, lastName || ulastName, email || uEmail, password || uPassword, id],
+      );
+
+      res.status(200).send({ message: 'User details updated successfully' });
+    } catch ({ message }) {
+      res.status(500).send({ error: { message } });
+    }
+  }
+
+  static async deleteUser(req, res) {
+    const { id } = req.user;
+    try {
+      const result = await database.query('DELETE FROM users WHERE id = $1', [id]);
+      if (result.rowCount > 0) res.status(204).send();
     } catch ({ message }) {
       res.status(500).send({ error: { message } });
     }
