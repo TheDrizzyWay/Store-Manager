@@ -2,6 +2,7 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
 import models from './models';
+import seeds from './seeds';
 
 dotenv.config();
 
