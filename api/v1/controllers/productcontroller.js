@@ -68,7 +68,7 @@ export default class ProductController {
   static async updateProduct(req, res) {
     const {
       name: pName, price: pPrice, quantity: pQuantity, minimumQuantity: pMinimumQuantity, imgUrl: pImgUrl, id,
-    } = req.user;
+    } = req.product;
     const {
       name, price, quantity, minimumQuantity, imgUrl
     } = req.body || {};
