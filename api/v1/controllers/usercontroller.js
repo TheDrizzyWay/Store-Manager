@@ -94,4 +94,14 @@ export default class UserController {
       res.status(500).send({ error: { message } });
     }
   }
+
+  static async getUserById(req, res) {
+    const { id } = req.user;
+    try {
+      const result = await database.query('SELECT * FROM users WHERE id = $1', [id]);
+      res.send(result.rows[0]);
+    } catch ({ message }) {
+      res.status(500).send({ error: { message } });
+    }
+  }
 }
