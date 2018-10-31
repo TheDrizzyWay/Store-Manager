@@ -107,7 +107,7 @@ export default class UserController {
 
   static async updateUser(req, res) {
     const {
-      firstName: ufirstName, lastName: ulastName, email: uEmail, password: uPassword, id,
+      firstName: uFirstName, lastName: uLastName, email: uEmail, password: uPassword, id,
     } = req.user;
     const {
       firstName, lastName, email, password,
@@ -116,7 +116,7 @@ export default class UserController {
     try {
       await database.query(
         'UPDATE users SET firstName = $1, lastName = $2, email = $3, password = $4 WHERE id = $5',
-        [firstName || ufirstName, lastName || ulastName, email || uEmail, password || uPassword, id],
+        [firstName || uFirstName, lastName || uLastName, email || uEmail, password || uPassword, id],
       );
 
       res.status(200).send({ message: 'User details updated successfully' });

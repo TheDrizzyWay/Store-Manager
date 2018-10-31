@@ -5,12 +5,7 @@ import models from './models';
 
 dotenv.config();
 
-let connectionString;
-if (process.env.NODE_ENV !== 'test') {
-	connectionString = process.env.DATABASE_URL;
-} else {
-	connectionString = process.env.TEST_DATABASE_URL;
-}
+let connectionString = process.env.DATABASE_URL;
 
 const pool = new Pool({ connectionString });
 
