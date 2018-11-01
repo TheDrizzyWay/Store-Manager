@@ -95,27 +95,22 @@ export default class UserController {
   }
 
   static async getUserById(req, res) {
-    const userId = parseInt(req.params.userId, 10);
+    const { id } = req.user;
     try {
-      const result = await database.query('SELECT * FROM users WHERE id = $1', [userId]);
-      if (result.rowCount <= 0) { 
-        return res.status(400).send({ error: 'User id not found'}); 
-      }
-      return res.send(result.rows[0]);
+      const result = await database.query('SELECT * FROM users WHERE id = $1', [id]);
+      res.send(result.rows[0]);
     } catch ({ message }) {
-      return res.status(500).send({ error: { message } });
+      res.status(500).send({ error: { message } });
     }
   }
 
   static async deleteUser(req, res) {
-    const { id } = req.body.id;
+    const { id } = req.user;
     try {
       const result = await database.query('DELETE FROM users WHERE id = $1', [id]);
-      if (result.rowCount > 0) {
-        res.status(204).send();
-      }
+      if (result.rowCount > 0) res.status(204).send();
     } catch ({ message }) {
-      return res.status(500).send({ error: { message } });
+      res.status(500).send({ error: { message } });
     }
   }
 }
