@@ -1,8 +1,17 @@
+import jwt from 'jsonwebtoken';
 import {
   passwordLength, validateEmail, comparePassword, hashPassword,
 } from '../helpers/inputvalidator';
 import database from '../database';
-import jwt from '../helpers/jwt';
+
+function createToken(user) {
+  const token = jwt.sign({
+    id: user.id,
+    exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
+  }, process.env.JWT_SECRET);
+
+  return token;
+}
 
 export default class UserController {
 	static async createAccount(req, res) {
@@ -65,19 +74,18 @@ export default class UserController {
     }
 
     try {
-      const result = await database.query('SELECT id, password FROM users WHERE email = $1', [email]);
-      if (result.rowCount <= 0) {
+      const user = await database.query('SELECT id, password FROM users WHERE email = $1', [email]);
+      if (user.rowCount <= 0) {
         res.status(401).send({ message: 'Invalid email/password combination.' });
         return;
       }
 
-      const { id: userId, password: userPassword } = result.rows[0];
+      const { id: userId, password: userPassword } = user.rows[0];
       if (!comparePassword(password, userPassword)) {
         res.status(401).send({ message: 'Invalid email and password combination.' });
         return;
       }
-
-      const token = await jwt.generateToken({ id: userId });
+      const token = createToken(user);
       res.status(200).send({ token, message: 'You are logged in.' });
     } catch ({ message }) {
       res
@@ -99,9 +107,12 @@ export default class UserController {
     const { id } = req.user;
     try {
       const result = await database.query('SELECT * FROM users WHERE id = $1', [id]);
-      res.send(result.rows[0]);
+      if (result.rowCount <= 0) { 
+        return res.status(400).send({ error: 'User id not found'}); 
+      }
+      return res.send(result.rows[0]);
     } catch ({ message }) {
-      res.status(500).send({ error: { message } });
+      return res.status(500).send({ error: { message } });
     }
   }
 

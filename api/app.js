@@ -1,7 +1,6 @@
 import express from 'express';
 
 import router from './v1/routes';
-import database from './v1/database';
 
 const app = express();
 

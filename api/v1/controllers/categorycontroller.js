@@ -50,7 +50,10 @@ export default class CategoryController {
     const { id } = req.category;
     try {
       const result = await database.query('SELECT * FROM categories WHERE id = $1', [id]);
-      res.send(result.rows[0]);
+      if (result.rowCount <= 0) { 
+        return res.status(400).send({ error: 'Category id not found'}); 
+      }
+      return res.send(result.rows[0]);
     } catch ({ message }) {
       res.status(500).send({ error: { message } });
     }
