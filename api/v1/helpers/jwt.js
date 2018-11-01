@@ -1,62 +1,27 @@
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import userController from '../controllers/usercontroller';
+import env from 'dotenv';
 
-dotenv.config();
+env.config();
+const { JWT_SECRET } = process.env;
 
-export default {
-  async user(req, res, next) {
-    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
-    if (!token) {
-      return res.status(403).send({ error: 'No token provided' });
-    }
+export default class JWT {
+  static generateToken(payload) {
+    return new Promise((resolve, reject) => jwt.sign(payload, JWT_SECRET, { expiresIn: '15d' }, (err, token) => {
+      if (err) return reject();
+      return resolve(token);
+    }));
+  }
 
-    try {
-      const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+  static verifyToken(token) {
+    return new Promise((resolve, reject) => jwt.verify(token, JWT_SECRET, (err, decoded) => {
+      if (err) return reject();
+      return resolve(decoded);
+    }));
+  }
 
-      try {
-        const user = await userController.getUserById(decoded.id);
-
-        req.user = {
-          id: user.id,
-          isAdmin: user.isAdmin,
-        };
-        next();
-        return user;
-      } catch (error) {
-        return res.status(500).send({ error: error.message });
-      }
-    } catch (error) {
-      return res.status(401).send({ error: 'Failed to authenticate' });
-    }
-  },
-
-  async admin(req, res, next) {
-    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
-    if (!token) {
-      return res.status(403).json({ error: 'No token provided' });
-    }
-
-    try {
-      const decoded = await jwt.verify(token, process.env.JWT_SECRET);
-      try {
-        const user = await userController.getUserById(decoded.id);
-
-        if (user.isAdmin !== true) {
-          return res.status(401).json({ error: 'Unauthorized' });
-        }
-
-        req.user = {
-          id: user.id,
-          isAdmin: user.isAdmin,
-        };
-        next();
-        return user;
-      } catch (error) {
-        return res.status(500).send({ error: error.message });
-      }
-    } catch (error) {
-      return res.status(401).json({ error: 'Failed to authenticate' });
-    }
-  },
-};
+  static destroyToken(payload) {
+    jwt.sign(payload, JWT_SECRET, {
+      expiresIn: Math.floor(Date.now() / 1000) - 60 * 60 * 24 * 30, // 30 days
+    });
+  }
+}

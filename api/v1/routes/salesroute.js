@@ -1,10 +1,10 @@
 import express from 'express';
 import salesController from '../controllers/salescontroller';
-import authenticate from '../helpers/jwt';
+import { requireAuth, userAuth, adminAuth } from '../middleware/middleware';
 
 const router = express.Router();
 
 router.post('/', salesController.createSale);
-router.get('/', authenticate.admin, salesController.getAllSales);
+router.get('/', requireAuth, salesController.getAllSales);
 
 export default router;

@@ -1,17 +1,8 @@
-import jwt from 'jsonwebtoken';
 import {
   passwordLength, validateEmail, comparePassword, hashPassword,
 } from '../helpers/inputvalidator';
+import jwt from '../helpers/jwt';
 import database from '../database';
-
-function createToken(user) {
-  const token = jwt.sign({
-    id: user.id,
-    exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
-  }, process.env.JWT_SECRET);
-
-  return token;
-}
 
 export default class UserController {
 	static async createAccount(req, res) {
@@ -74,18 +65,18 @@ export default class UserController {
     }
 
     try {
-      const user = await database.query('SELECT id, password FROM users WHERE email = $1', [email]);
-      if (user.rowCount <= 0) {
+      const result = await database.query('SELECT id, password FROM users WHERE email = $1', [email]);
+      if (result.rowCount <= 0) {
         res.status(401).send({ message: 'Invalid email/password combination.' });
         return;
       }
 
-      const { id: userId, password: userPassword } = user.rows[0];
+      const { id: userId, password: userPassword } = result.rows[0];
       if (!comparePassword(password, userPassword)) {
         res.status(401).send({ message: 'Invalid email and password combination.' });
         return;
       }
-      const token = createToken(user);
+      const token = await jwt.generateToken({ id: userId });
       res.status(200).send({ token, message: 'You are logged in.' });
     } catch ({ message }) {
       res

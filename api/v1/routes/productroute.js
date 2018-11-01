@@ -1,13 +1,13 @@
 import express from 'express';
 import productController from '../controllers/productcontroller';
-import authenticate from '../helpers/jwt';
+import { requireAuth, userAuth, adminAuth } from '../middleware/middleware';
 
 const router = express.Router();
 
-router.post('/', authenticate.admin, productController.createProduct);
-router.get('/', authenticate.user, productController.getAllProducts);
-router.get('/:id', authenticate.user, productController.getProductById);
-router.put('/:id', authenticate.admin, productController.updateProduct);
-router.delete('/:id', authenticate.admin, productController.deleteProduct);
+router.post('/', requireAuth, productController.createProduct);
+router.get('/', requireAuth, productController.getAllProducts);
+router.get('/:id', requireAuth, productController.getProductById);
+router.put('/:id', requireAuth, productController.updateProduct);
+router.delete('/:id', requireAuth, productController.deleteProduct);
 
 export default router;
