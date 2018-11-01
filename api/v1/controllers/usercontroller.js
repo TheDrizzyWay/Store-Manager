@@ -95,9 +95,9 @@ export default class UserController {
   }
 
   static async getUserById(req, res) {
-    const { id } = req.user;
+    const userId = parseInt(req.params.userId, 10);
     try {
-      const result = await database.query('SELECT * FROM users WHERE id = $1', [id]);
+      const result = await database.query('SELECT * FROM users WHERE id = $1', [userId]);
       if (result.rowCount <= 0) { 
         return res.status(400).send({ error: 'User id not found'}); 
       }
@@ -108,12 +108,14 @@ export default class UserController {
   }
 
   static async deleteUser(req, res) {
-    const { id } = req.user;
+    const { id } = req.body.id;
     try {
       const result = await database.query('DELETE FROM users WHERE id = $1', [id]);
-      if (result.rowCount > 0) res.status(204).send();
+      if (result.rowCount > 0) {
+        res.status(204).send();
+      }
     } catch ({ message }) {
-      res.status(500).send({ error: { message } });
+      return res.status(500).send({ error: { message } });
     }
   }
 }

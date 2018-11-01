@@ -1,13 +1,13 @@
 import express from 'express';
 import productController from '../controllers/productcontroller';
-import { requireAuth, userAuth, adminAuth } from '../middleware/middleware';
+import { requireAuth, attendantAuth, adminAuth } from '../middleware/middleware';
 
 const router = express.Router();
 
-router.post('/', requireAuth, productController.createProduct);
+router.post('/', requireAuth, adminAuth, productController.createProduct);
 router.get('/', requireAuth, productController.getAllProducts);
 router.get('/:id', requireAuth, productController.getProductById);
-router.put('/:id', requireAuth, productController.updateProduct);
-router.delete('/:id', requireAuth, productController.deleteProduct);
+router.put('/:id', requireAuth, adminAuth, productController.updateProduct);
+router.delete('/:id', requireAuth, adminAuth, productController.deleteProduct);
 
 export default router;

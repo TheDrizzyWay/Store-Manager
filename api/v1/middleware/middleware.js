@@ -27,16 +27,16 @@ export const requireAuth = async (req, res, next) => {
 
 export const adminAuth = (req, res, next) => {
   const user = Object.assign({}, req.user);
-  if (user && user.isAdmin == true) {
-    return next();
+  if (user && user.isadmin !== 'true') {
+    return res.status(401).send({ error: { message: 'Unauthorized' } });
   }
-  return res.status(401).send({ error: { message: 'Unauthorized' } });
+  next();
 };
 
-export const userAuth = (req, res, next) => {
+export const attendantAuth = (req, res, next) => {
   const user = Object.assign({}, req.user);
-  if (user && user.isAdmin !== true) {
-    return next();
+  if (user && user.isadmin !== true) {
+    return res.status(401).send({ error: { message: 'Unauthorized' } });
   }
-  return res.status(401).send({ error: { message: 'Unauthorized' } });
+  next();
 };
