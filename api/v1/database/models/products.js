@@ -8,6 +8,6 @@ export default {
 	minimumQuantity integer NOT NULL,
 	imgUrl text NOT NULL,
 	created_at TIMESTAMP DEFAULT NOW(),
-	updated_at TIMESTAMP DEFAULT NULL
+	updated_at TIMESTAMP DEFAULT NOW()
 	)`,
 };

@@ -56,7 +56,7 @@ export default class ProductController {
   }
 
   static async getProductById(req, res) {
-    const { id } = req.product;
+    const { id } = req.params;
     try {
       const result = await database.query('SELECT * FROM products WHERE id = $1', [id]);
       if (result.rowCount <= 0) { 
@@ -64,14 +64,14 @@ export default class ProductController {
       }
       return res.send(result.rows[0]);
     } catch ({ message }) {
-      res.status(500).send({ error: { message } });
+      return res.status(500).send({ error: { message } });
     }
   }
 
   static async updateProduct(req, res) {
     const {
       name: pName, price: pPrice, quantity: pQuantity, minimumQuantity: pMinimumQuantity, imgUrl: pImgUrl, id,
-    } = req.product;
+    } = req.params;
     const {
       name, price, quantity, minimumQuantity, imgUrl,
     } = req.body || {};
@@ -89,10 +89,13 @@ export default class ProductController {
   }
 
   static async deleteProduct(req, res) {
-    const { id } = req.product;
+    const { id } = req.params;
     try {
       const result = await database.query('DELETE FROM products WHERE id = $1', [id]);
-      if (result.rowCount > 0) res.status(204).send();
+      if (result.rowCount <= 0) {
+        res.status(400).send({ error: 'User not found' });
+      }
+      res.status(204).send();
     } catch ({ message }) {
       res.status(500).send({ error: { message } });
     }

@@ -8,7 +8,7 @@ export default {
         password VARCHAR(100),
         isAdmin VARCHAR (20),
         created_at TIMESTAMP DEFAULT NOW(),
-		updated_at TIMESTAMP DEFAULT NULL
+		updated_at TIMESTAMP DEFAULT NOW()
     )
     `,
 };

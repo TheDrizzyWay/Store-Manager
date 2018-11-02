@@ -47,11 +47,11 @@ export default class CategoryController {
   }
 
   static async getCategoryById(req, res) {
-    const { id } = req.category;
+    const { id } = req.params;
     try {
       const result = await database.query('SELECT * FROM categories WHERE id = $1', [id]);
       if (result.rowCount <= 0) { 
-        return res.status(400).send({ error: 'Category id not found'}); 
+        return res.status(400).send({ error: 'Category id not found'});
       }
       return res.send(result.rows[0]);
     } catch ({ message }) {
@@ -62,7 +62,7 @@ export default class CategoryController {
   static async updateCategory(req, res) {
     const {
       name: cName, description: cDescription, id,
-    } = req.category;
+    } = req.params;
     const {
       name, description,
     } = req.body || {};
@@ -80,10 +80,13 @@ export default class CategoryController {
   }
 
   static async deleteCategory(req, res) {
-    const { id } = req.category;
+    const { id } = req.params;
     try {
       const result = await database.query('DELETE FROM categories WHERE id = $1', [id]);
-      if (result.rowCount > 0) res.status(204).send();
+      if (result.rowCount <= 0) {
+        res.status(400).send({ error: 'Category not found' });
+      }
+      res.status(204).send();
     } catch ({ message }) {
       res.status(500).send({ error: { message } });
     }
