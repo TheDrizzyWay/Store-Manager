@@ -11,6 +11,8 @@
     "build-babel": "babel -d ./build ./api -s",
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./build/app.js",
+    "unmigrate": "babel-node api/v1/database/unmigrate",
+    "migrations": "babel-node api/v1/database/migrations && babel-node api/v1/database/seed",
     "test": "nyc --reporter=text-summary mocha -c ./test/**/*.js --exit --require babel-core/register",
     "devstart": "node_modules/.bin/nodemon api/app.js --exec babel-node --"
   },
