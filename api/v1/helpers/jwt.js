@@ -6,7 +6,7 @@ const { JWT_SECRET } = process.env;
 
 export default class JWT {
   static generateToken(payload) {
-    return new Promise((resolve, reject) => jwt.sign(payload, JWT_SECRET, { expiresIn: '15d' }, (err, token) => {
+    return new Promise((resolve, reject) => jwt.sign(payload, JWT_SECRET, { expiresIn: '2d' }, (err, token) => {
       if (err) return reject();
       return resolve(token);
     }));
@@ -21,7 +21,7 @@ export default class JWT {
 
   static destroyToken(payload) {
     jwt.sign(payload, JWT_SECRET, {
-      expiresIn: Math.floor(Date.now() / 1000) - 60 * 60 * 24 * 30, // 30 days
+      expiresIn: Math.floor(Date.now() / 1000) - 60 * 60 * 24 * 3, // 3 days
     });
   }
 }

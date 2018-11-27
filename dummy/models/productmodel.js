@@ -4,6 +4,7 @@ import uuid from 'uuid';
 export const allProducts = [{
   id: 'd7ce85ef-8b29-418d-b79f-3bb597a12c1e',
   name: 'adidas f10',
+  // image url should have file extension
   imageUrl: 'sample-image.com',
   price: '10000',
   quantity: '10',

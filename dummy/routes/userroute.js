@@ -4,9 +4,11 @@ import adminValidator from '../middleware/adminvalidator';
 import loggedInValidator from '../middleware/loggedinvalidator';
 import userLoginValidator from '../middleware/userloginvalidator';
 import createUserValidator from '../middleware/createuservalidator';
+// try destructuring controller imports
 
 const router = express.Router();
 
+// user should be able to get his own info
 router.get('/logout', loggedInValidator, userController.logoutUser);
 router.get('/', loggedInValidator, adminValidator, userController.findAllUsers);
 router.get('/:userId', loggedInValidator, adminValidator, userController.findUserById);

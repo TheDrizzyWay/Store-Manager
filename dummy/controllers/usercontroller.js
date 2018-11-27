@@ -5,6 +5,7 @@ export default {
     const userEmail = req.body.email;
     const emailExists = allUsers.find(obj => obj.email === userEmail);
     if (emailExists !== undefined) {
+      // try if (!emailExists)
       return res.status(401).send({ success: false, message: 'This email address is already taken' });
     }
     const user = new User(req.body);
@@ -36,6 +37,7 @@ export default {
   },
 
   findAllUsers: (req, res) => {
+    // there should be logic for checking if array is empty
     return res.status(200).send({ success: true, message: 'Users found.', data: allUsers });
   },
 
@@ -49,6 +51,7 @@ export default {
   },
 
   updateUser: (req, res) => {
+    // there should be an update user validator
     const userId = req.params.userId;
     const previousUser = allUsers.find(obj => obj.id === userId);
     if (previousUser === undefined) {

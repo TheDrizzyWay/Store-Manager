@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.status(200).send('Welcome to Store Manager!');
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
 export default app;

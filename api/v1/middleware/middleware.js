@@ -5,7 +5,7 @@ export const requireAuth = async (req, res, next) => {
   const { authorization: token = '' } = req.headers || {};
 
   if (!token) {
-    res.status(401).send({ error: { message: 'Unauthorized' } });
+    res.status(401).send({ error: { message: 'Access Denied. No Token Provided.' } });
     return;
   }
 
@@ -35,7 +35,7 @@ export const adminAuth = (req, res, next) => {
 
 export const attendantAuth = (req, res, next) => {
   const user = Object.assign({}, req.user);
-  if (user && user.isadmin == true) {
+  if (user && user.isadmin == 'true') {
     return res.status(401).send({ error: { message: 'Unauthorized' } });
   }
   next();
