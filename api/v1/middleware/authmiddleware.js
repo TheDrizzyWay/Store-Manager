@@ -1,42 +1,38 @@
-import jwt from '../helpers/jwt';
-import database from '../database';
+import hashes from './hashes';
 
 export const requireAuth = async (req, res, next) => {
-  const { authorization: token = '' } = req.headers || {};
+  const authHeader = req.headers.authorization;
+  if (typeof authHeader === 'undefined') {
+    res.status(401).send({ success: false, message: 'Unauthorized - Header Not Set' });
+  }
 
+  const token = authHeader.split(' ')[1];
   if (!token) {
-    res.status(401).send({ error: { message: 'Access Denied. No Token Provided.' } });
+    res.status(401).send({ success: false, message: 'Access Denied. Please Log In.' });
     return;
   }
 
   try {
-    const { id } = await jwt.verifyToken(token);
-    const result = await database.query('SELECT id, email, isAdmin FROM users WHERE id = $1', [id]);
-
-    if (result.rowCount <= 0) {
-      res.status(401).send({ error: { message: 'Unauthorized' } });
-      return;
-    }
-    const user = result.rows[0];
-    req.user = user;
+    const decoded = await hashes.verifyToken(token);
+    req.user = decoded;
     next();
   } catch (error) {
-    res.status(500).send({ error: { message: 'Error verifying user.' } });
+    res.status(500).send({ success: false, message: 'Error verifying user.' });
   }
 };
 
 export const adminAuth = (req, res, next) => {
-  const user = Object.assign({}, req.user);
-  if (user && user.isadmin !== 'true') {
-    return res.status(401).send({ error: { message: 'Unauthorized' } });
+  const { role } = req.user;
+  if (role !== 'Admin') {
+    return res.status(403).send({ success: false, message: 'Access Denied.' });
   }
-  next();
+  return next();
 };
 
 export const attendantAuth = (req, res, next) => {
-  const user = Object.assign({}, req.user);
-  if (user && user.isadmin == 'true') {
-    return res.status(401).send({ error: { message: 'Unauthorized' } });
+  const { role } = req.user;
+  if (role !== 'Attendant') {
+    return res.status(403).send({ success: false, message: 'Access Denied.' });
   }
-  next();
+  return next();
 };

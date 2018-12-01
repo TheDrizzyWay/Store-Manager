@@ -1,62 +1,24 @@
-import {
-  passwordLength, validateEmail, comparePassword, hashPassword,
-} from '../helpers/inputvalidator';
-import jwt from '../helpers/jwt';
-import database from '../database';
+import hashes from '../middleware/hashes';
+import User from '../models/Users';
 
-export default class UserController {
-	static async createAccount(req, res) {
-    const {
-      firstName = '', lastName = '', email, password, isAdmin,
-    } = req.body;
-
-    if (!email || !password) {
-      res.status(400).send({ message: 'Email and password are required.' });
-      return;
-    }
-
-    if (!passwordLength(password)) {
-      res.status(400).send({ message: 'Password must be at least 6 characters long.' });
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      res.status(400).send({ message: 'Invalid email address.' });
-      return;
-    }
+export default {
+  signUp: async (req, res) => {
+    const user = new User(req.body);
+    user.password = hashes.hashPassword(user.password);
 
     try {
-      let result = await database.query('SELECT email FROM users WHERE email = $1', [email]);
-
-      if (result.rowCount > 0) {
-        res.status(409).send({ message: 'Email is already registered.' });
-        return;
-      }
-
-      const hash = await hashPassword(password);
-
-      result = await database.query(
-        `INSERT INTO users 
-      (
-        firstName,
-        lastName,
-        email,
-        password,
-        isAdmin)
-        VALUES
-        ($1, $2, $3, $4, $5)
-      `,
-        [firstName, lastName, email, hash, isAdmin],
-      );
-
-      res.status(201).send({ message: 'user created successfully' });
-      return;
-    } catch ({ message }) {
-      res.status(500).send({ error: { message } });
+      const newUser = await user.signUp();
+      return res.status(201).send({
+        success: true,
+        message: 'User created successfully',
+        data: newUser,
+      });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
     }
-  }
+  },
 
-  static async logIn(req, res) {
+/*  static async logIn(req, res) {
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -117,6 +79,6 @@ export default class UserController {
       res.status(204).send();
     } catch ({ message }) {
       res.status(500).send({ error: { message } });
-    }
-  }
-}
+ ;;   }
+  } */
+};

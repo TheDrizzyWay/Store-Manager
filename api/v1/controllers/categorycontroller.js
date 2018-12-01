@@ -1,4 +1,3 @@
-import database from '../database';
 
 export default class CategoryController {
 	static async createCategory(req, res) {
@@ -20,7 +19,7 @@ export default class CategoryController {
       }
 
       result = await database.query(
-        `INSERT INTO categories 
+        `INSERT INTO categories
       (
         name,
         description)
@@ -50,7 +49,7 @@ export default class CategoryController {
     const { id } = req.params;
     try {
       const result = await database.query('SELECT * FROM categories WHERE id = $1', [id]);
-      if (result.rowCount <= 0) { 
+      if (result.rowCount <= 0) {
         return res.status(400).send({ error: 'Category id not found'});
       }
       return res.send(result.rows[0]);

@@ -1,5 +1,3 @@
-import { validateUrl } from '../helpers/inputvalidator';
-import database from '../database';
 
 export default class ProductController {
 	static async createProduct(req, res) {
@@ -26,7 +24,7 @@ export default class ProductController {
       }
 
       result = await database.query(
-        `INSERT INTO products 
+        `INSERT INTO products
       (
         name,
         price,
@@ -59,7 +57,7 @@ export default class ProductController {
     const { id } = req.params;
     try {
       const result = await database.query('SELECT * FROM products WHERE id = $1', [id]);
-      if (result.rowCount <= 0) { 
+      if (result.rowCount <= 0) {
         return res.status(400).send({ error: 'Product id not found'});
       }
       return res.send(result.rows[0]);

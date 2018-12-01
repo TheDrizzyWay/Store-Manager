@@ -1,4 +1,6 @@
-import { allUsers, loggedIn, adminRole, User } from '../models/usermodel';
+import {
+  allUsers, loggedIn, adminRole, User,
+} from '../models/usermodel';
 
 export default {
   createUser: (req, res) => {

@@ -1,5 +1,3 @@
-import jwt from '../helpers/jwt';
-import database from '../database';
 
 export default class SalesController {
 	static async createSale(req, res) {
@@ -34,7 +32,7 @@ export default class SalesController {
         }
 
      result = await database.query(
-            `INSERT INTO sales 
+            `INSERT INTO sales
           (
             name,
             price,

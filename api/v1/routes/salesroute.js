@@ -1,6 +1,6 @@
 import express from 'express';
 import salesController from '../controllers/salescontroller';
-import { requireAuth, attendantAuth, adminAuth } from '../middleware/middleware';
+import { requireAuth, attendantAuth, adminAuth } from '../middleware/authmiddleware';
 
 const router = express.Router();
 
