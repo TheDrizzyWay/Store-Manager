@@ -30,7 +30,7 @@ export default class Hashes {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   }
 
-  static comparePassword(hashPassword, password) {
+  static comparePassword(password, hashPassword) {
     return bcrypt.compareSync(password, hashPassword);
   }
 }

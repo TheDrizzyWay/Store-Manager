@@ -10,7 +10,7 @@ export default {
       const newUser = await user.signUp();
       return res.status(201).send({
         success: true,
-        message: 'User created successfully',
+        message: 'User account created successfully',
         data: newUser,
       });
     } catch (error) {
@@ -18,31 +18,34 @@ export default {
     }
   },
 
-/*  static async logIn(req, res) {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      res.status(400).send({ message: 'Please provide email & password to login.' });
-      return;
-    }
+  signIn: async (req, res) => {
+    const { email, password } = (req.body);
 
     try {
-      const result = await database.query('SELECT id, password FROM users WHERE email = $1', [email]);
-      if (result.rowCount <= 0) {
-        res.status(401).send({ message: 'Invalid email/password combination.' });
-        return;
+      const result = await User.signIn(email);
+      if (!result) {
+        return res.status(401).send({ success: false, message: 'User account not found.' });
       }
+      const { password: userPassword } = result;
+      if (!hashes.comparePassword(password, userPassword)) {
+        return res.status(401).send({
+          success: false,
+          message: 'Invalid email/password combination.',
+        });
+      }
+      return res.status(200).send({ success: true, message: 'You are now logged in.' });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
+    }
+  },
 
-      const { id: userId, password: userPassword } = result.rows[0];
-      if (!comparePassword(password, userPassword)) {
-        res.status(401).send({ message: 'Invalid email and password combination.' });
-        return;
-      }
+// generate token next
+/*
       const token = await jwt.generateToken({ id: userId });
       res.status(200).send({ token, message: 'You are logged in.' });
     } catch ({ message }) {
-      res
-        .status(500)
+s
+    .status(500)
         .send({ error: { message: 'Server encountered a problem while trying to log in.' } });
     }
   }

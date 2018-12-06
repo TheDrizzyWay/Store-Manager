@@ -4,9 +4,10 @@ import { requireAuth, adminAuth } from '../middleware/authmiddleware';
 
 const router = express.Router();
 
-router.post('/signup', requireAuth, adminAuth, userController.signUp);
+/*
 router.get('/', requireAuth, adminAuth, userController.getAllUsers);
 router.get('/:id', requireAuth, adminAuth, userController.getUserById);
-router.delete('/:id', requireAuth, adminAuth, userController.deleteUser);
+router.delete('/:id', requireAuth, adminAuth, userController.deleteUser); */
+router.post('/signup', requireAuth, adminAuth, userController.signUp);
 
 export default router;

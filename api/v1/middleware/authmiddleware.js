@@ -4,6 +4,7 @@ export const requireAuth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (typeof authHeader === 'undefined') {
     res.status(401).send({ success: false, message: 'Unauthorized - Header Not Set' });
+    return;
   }
 
   const token = authHeader.split(' ')[1];
@@ -14,6 +15,7 @@ export const requireAuth = async (req, res, next) => {
 
   try {
     const decoded = await hashes.verifyToken(token);
+    // verify token authenticity from database
     req.user = decoded;
     next();
   } catch (error) {

@@ -10,7 +10,7 @@ export default class User {
     this.last_name = user.last_name ? user.last_name : null;
     this.email = user.email ? user.email : null;
     this.password = user.password ? user.password : null;
-    this.role = user.role ? user.role : 'Attendant';
+    this.role = user.role ? user.role : null;
     if (user.created_at) {
       this.created_at = user.created_at;
     }
@@ -25,7 +25,13 @@ export default class User {
     const values = [uuid.v4(), this.first_name, this.last_name, this.email,
       this.password, this.role];
     const { rows } = await pool.query(text, values);
-    const newUser = rows[0];
-    return newUser;
+    return rows[0];
+  }
+
+  static async signIn(email) {
+    const text = 'SELECT id, password FROM users WHERE email = $1';
+    const values = [email];
+    const { rows } = await pool.query(text, values);
+    return rows[0];
   }
 }

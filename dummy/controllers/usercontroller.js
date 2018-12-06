@@ -38,10 +38,8 @@ export default {
     return res.status(200).send({ success: true, message: 'You have logged out successfully.' });
   },
 
-  findAllUsers: (req, res) => {
-    // there should be logic for checking if array is empty
-    return res.status(200).send({ success: true, message: 'Users found.', data: allUsers });
-  },
+  findAllUsers: (req, res) => res.status(200).send({ success: true, message: 'Users found.', data: allUsers }),
+  // there should be logic for checking if array is empty
 
   findUserById: (req, res) => {
     const userId = req.params.userId;
