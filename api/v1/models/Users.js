@@ -47,4 +47,11 @@ export default class User {
     const { rows } = await pool.query(text, values);
     return rows[0];
   }
+
+  static async deleteUser(id) {
+    const text = 'DELETE FROM users WHERE id = $1';
+    const values = [id];
+    const result = await pool.query(text, values);
+    return result;
+  }
 }

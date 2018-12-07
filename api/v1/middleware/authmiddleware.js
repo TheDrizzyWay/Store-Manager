@@ -25,7 +25,7 @@ export const requireAuth = async (req, res, next) => {
 export const adminAuth = (req, res, next) => {
   const { role } = req.user;
   if (role !== 'admin') {
-    return res.status(403).send({ success: false, message: 'Access Denied.' });
+    return res.status(403).send({ success: false, message: 'Access Denied. For Admins only.' });
   }
   return next();
 };

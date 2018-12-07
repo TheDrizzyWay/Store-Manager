@@ -62,32 +62,30 @@ export default {
       return res.status(500).send({ success: false, message: error.message });
     }
   },
-/*
 
-// update user
-  static async getUserById(req, res) {
-    const { id } = req.params;
+  getCurrentUser: async (req, res) => {
     try {
-      const result = await database.query('SELECT * FROM users WHERE id = $1', [id]);
-      if (result.rowCount <= 0) {
-        res.status(400).send({ error: 'User not found' });
-      }
-      res.send(result.rows[0]);
-    } catch ({ message }) {
-      res.status(500).send({ error: { message } });
+      const { id } = req.user;
+      // add logic to include sales for attendants
+      const result = await User.getUserById(id);
+      return res.status(200).send({ success: true, data: result });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
     }
-  }
+  },
 
-  static async deleteUser(req, res) {
-    const { id } = req.params;
+  deleteUser: async (req, res) => {
     try {
-      const result = await database.query('DELETE FROM users WHERE id = $1', [id]);
-      if (result.rowCount <= 0) {
-        res.status(400).send({ error: 'User not found' });
+      const { id } = req.params;
+      const findUser = await User.getUserById(id);
+      if (!findUser) {
+        return res.status(400).send({ success: false, message: 'User not found.' });
       }
-      res.status(204).send();
-    } catch ({ message }) {
-      res.status(500).send({ error: { message } });
- ;;   }
-  } */
+      await User.deleteUser(id);
+      return res.status(200).send({ success: true, message: 'User deleted successfully.' });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
+    }
+  },
+  // update user
 };
