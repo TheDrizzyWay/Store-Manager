@@ -18,11 +18,11 @@ export default {
     }
   },
 
-  signIn: async (req, res) => {
+  logIn: async (req, res) => {
     const { email, password } = (req.body);
 
     try {
-      const result = await User.signIn(email);
+      const result = await User.logIn(email);
       if (!result) {
         return res.status(401).send({ success: false, message: 'User account not found.' });
       }
@@ -33,32 +33,25 @@ export default {
           message: 'Invalid email/password combination.',
         });
       }
-      return res.status(200).send({ success: true, message: 'You are now logged in.' });
+      const { id, role } = result;
+      const token = await hashes.generateToken({ id, role });
+      return res.status(200).send({ success: true, message: 'You are now logged in.', token });
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }
   },
 
-// generate token next
-/*
-      const token = await jwt.generateToken({ id: userId });
-      res.status(200).send({ token, message: 'You are logged in.' });
-    } catch ({ message }) {
-s
-    .status(500)
-        .send({ error: { message: 'Server encountered a problem while trying to log in.' } });
-    }
-  }
-
-  static async getAllUsers(req, res) {
+  getAllUsers: async (req, res) => {
     try {
-      const result = await database.query('SELECT * FROM users');
-      res.status(200).send(result.rows);
-    } catch ({ message }) {
-      res.status(500).send({ error: { message } });
+      const result = await User.getAllUsers();
+      return res.status(200).send({ success: true, data: result });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
     }
-  }
+  },
+/*
 
+// update user
   static async getUserById(req, res) {
     const { id } = req.params;
     try {

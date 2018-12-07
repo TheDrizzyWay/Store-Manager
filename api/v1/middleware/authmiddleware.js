@@ -15,7 +15,6 @@ export const requireAuth = async (req, res, next) => {
 
   try {
     const decoded = await hashes.verifyToken(token);
-    // verify token authenticity from database
     req.user = decoded;
     next();
   } catch (error) {
@@ -25,7 +24,7 @@ export const requireAuth = async (req, res, next) => {
 
 export const adminAuth = (req, res, next) => {
   const { role } = req.user;
-  if (role !== 'Admin') {
+  if (role !== 'admin') {
     return res.status(403).send({ success: false, message: 'Access Denied.' });
   }
   return next();

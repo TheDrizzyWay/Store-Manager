@@ -2,12 +2,11 @@ import express from 'express';
 import userController from '../controllers/usercontroller';
 import { requireAuth, adminAuth } from '../middleware/authmiddleware';
 
+const { getAllUsers } = userController;
 const router = express.Router();
 
 /*
-router.get('/', requireAuth, adminAuth, userController.getAllUsers);
 router.get('/:id', requireAuth, adminAuth, userController.getUserById);
 router.delete('/:id', requireAuth, adminAuth, userController.deleteUser); */
-router.post('/signup', requireAuth, adminAuth, userController.signUp);
-
+router.get('/', requireAuth, adminAuth, getAllUsers);
 export default router;

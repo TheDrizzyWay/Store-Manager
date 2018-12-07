@@ -28,10 +28,16 @@ export default class User {
     return rows[0];
   }
 
-  static async signIn(email) {
-    const text = 'SELECT id, password FROM users WHERE email = $1';
+  static async logIn(email) {
+    const text = 'SELECT id, password, role FROM users WHERE email = $1';
     const values = [email];
     const { rows } = await pool.query(text, values);
     return rows[0];
+  }
+
+  static async getAllUsers() {
+    const text = 'SELECT * FROM users';
+    const { rows } = await pool.query(text);
+    return rows;
   }
 }

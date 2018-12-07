@@ -20,12 +20,6 @@ export default class Hashes {
     }));
   }
 
-  static destroyToken(payload) {
-    jwt.sign(payload, JWT_SECRET, {
-      expiresIn: Math.floor(Date.now() / 1000) - 60 * 60 * 24 * 3,
-    });
-  }
-
   static hashPassword(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   }
