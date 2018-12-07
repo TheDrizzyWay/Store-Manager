@@ -49,6 +49,19 @@ export default {
       return res.status(500).send({ success: false, message: error.message });
     }
   },
+
+  getUserById: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const result = await User.getUserById(id);
+      if (!result) {
+        return res.status(400).send({ success: false, message: 'User not found' });
+      }
+      return res.status(200).send({ success: true, data: result });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
+    }
+  },
 /*
 
 // update user
