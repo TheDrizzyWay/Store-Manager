@@ -25,4 +25,72 @@ export default {
     req.body.password = newPassword;
     return next();
   },
+
+  signUpValid: async (req, res, next) => {
+    const user = req.body;
+    const errors = [];
+    const newFirstName = user.first_name.trim().toUpperCase();
+    const newLastName = user.last_name.trim().toUpperCase();
+    const newEmail = user.email.trim();
+    const newPassword = user.password.trim();
+    const newRole = user.role.trim();
+
+    if (!newFirstName || validator.isEmpty(newFirstName)) {
+      errors.push('Please insert your first name');
+    }
+    if (!validator.isAlpha(newFirstName)) {
+      errors.push('Your first name should contain only alphabets.');
+    }
+    if (!validator.isLength(newFirstName, { min: 3, max: 50 })) {
+      errors.push('Your first name should be between 2 and 50 characters long');
+    }
+    if (!newLastName || validator.isEmpty(newLastName)) {
+      errors.push('Please insert your last name');
+    }
+    if (!validator.isAlpha(newLastName)) {
+      errors.push('Your last name should contain only alphabets.');
+    }
+    if (!validator.isLength(newLastName, { min: 3, max: 50 })) {
+      errors.push('Your last name should be between 2 and 50 characters long.');
+    }
+    if (!newEmail || validator.isEmpty(newEmail) || !validator.isEmail(newEmail)) {
+      errors.push('Please insert a valid email address.');
+    }
+    if (!newPassword || validator.isEmpty(newPassword)) {
+      errors.push('Please insert your password');
+    }
+    if (!validator.isLength(newPassword, { min: 6, max: 25 })) {
+      errors.push('Your password should be between 6 and 25 characters long.');
+    }
+    if (!validator.isAlphanumeric(newPassword)) {
+      errors.push('Your password should contain only letters and numbers.');
+    }
+    if (!newRole || validator.isEmpty(newRole)) {
+      errors.push('Please insert user role.');
+    }
+    if (!validator.isIn(newRole, ['admin', 'attendant'])) {
+      errors.push('Please insert a valid role');
+    }
+    if (errors.length > 0) {
+      return res.status(400).send({
+        success: false,
+        data: errors,
+      });
+    }
+    req.body.first_name = newFirstName;
+    req.body.last_name = newLastName;
+    req.body.email = newEmail;
+    req.body.password = newPassword;
+    req.body.role = newRole;
+
+    try {
+      const result = await User.logIn(newEmail);
+      if (result) {
+        return res.status(400).send({ success: false, message: 'This email address is already taken' });
+      }
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
+    }
+    return next();
+  },
 };
