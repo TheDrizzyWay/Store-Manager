@@ -1,42 +1,21 @@
+import Category from '../models/Categories';
 
-export default class CategoryController {
-	static async createCategory(req, res) {
-    const {
-      name = '', description = '',
-    } = req.body;
-
-    if (!name || !description) {
-      res.status(400).send({ message: 'All fields are required.' });
-      return;
-    }
-
+export default {
+  createCategory: async (req, res) => {
+    const category = new Category(req.body);
     try {
-      let result = await database.query('SELECT name FROM products WHERE name = $1', [name]);
-
-      if (result.rowCount > 0) {
-        res.status(409).send({ message: 'This category already exists.' });
-        return;
-      }
-
-      result = await database.query(
-        `INSERT INTO categories
-      (
-        name,
-        description)
-        VALUES
-        ($1, $2)
-      `,
-        [name, description],
-      );
-
-      res.status(201).send({ message: 'Category created successfully' });
-      return;
-    } catch ({ message }) {
-      res.status(500).send({ error: { message } });
+      const result = await category.create();
+      return res.status(201).send({
+        success: true,
+        message: 'Category created successfully.',
+        data: result,
+      });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
     }
-  }
+  },
 
-  static async getAllCategories(req, res) {
+/*  static async getAllCategories(req, res) {
     try {
       const result = await database.query('SELECT * FROM categories');
       res.status(200).send(result.rows);
@@ -89,5 +68,5 @@ export default class CategoryController {
     } catch ({ message }) {
       res.status(500).send({ error: { message } });
     }
-  }
-}
+  } */
+};

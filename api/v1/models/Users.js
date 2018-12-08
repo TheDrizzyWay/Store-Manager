@@ -6,11 +6,11 @@ export default class User {
     if (user.id) {
       this.id = user.id;
     }
-    this.first_name = user.first_name ? user.first_name : null;
-    this.last_name = user.last_name ? user.last_name : null;
-    this.email = user.email ? user.email : null;
-    this.password = user.password ? user.password : null;
-    this.role = user.role ? user.role : null;
+    this.first_name = user.first_name;
+    this.last_name = user.last_name;
+    this.email = user.email;
+    this.password = user.password;
+    this.role = user.role;
     if (user.created_at) {
       this.created_at = user.created_at;
     }
