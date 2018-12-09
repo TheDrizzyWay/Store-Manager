@@ -15,7 +15,7 @@ export default class Category {
     }
   }
 
-  async create() {
+  async createCategory() {
     const text = 'INSERT INTO categories (id, name) VALUES ($1, $2) RETURNING *';
     const values = [uuid.v4(), this.name];
     const { rows } = await pool.query(text, values);
@@ -31,6 +31,13 @@ export default class Category {
   static async getCategoryById(id) {
     const text = 'SELECT * FROM categories WHERE id = $1';
     const values = [id];
+    const { rows } = await pool.query(text, values);
+    return rows[0];
+  }
+
+  static async getCategoryByName(name) {
+    const text = 'SELECT * FROM categories WHERE name = $1';
+    const values = [name];
     const { rows } = await pool.query(text, values);
     return rows[0];
   }

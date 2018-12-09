@@ -4,7 +4,7 @@ export default {
   createCategory: async (req, res) => {
     const category = new Category(req.body);
     try {
-      const result = await category.create();
+      const result = await category.createCategory();
       return res.status(201).send({
         success: true,
         message: 'Category created successfully.',

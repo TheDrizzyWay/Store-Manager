@@ -1,6 +1,22 @@
+import Product from '../models/Products';
 
-export default class ProductController {
-	static async createProduct(req, res) {
+export default {
+  createProduct: async (req, res) => {
+    const product = new Product(req.body);
+    try {
+      const result = await product.createProduct();
+      return res.status(201).send({
+        success: true,
+        message: 'Product created successfully.',
+        data: result,
+      });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
+    }
+  },
+
+/*
+    static async createProduct(req, res) {
     const {
       name = '', price = '', quantity = '', minimumQuantity = '', imgUrl,
     } = req.body;
@@ -77,7 +93,8 @@ export default class ProductController {
     try {
       await database.query(
         'UPDATE products SET name = $1, price = $2, quantity = $3, minimumQuantity = $4, imgUrl = $5 WHERE id = $6',
-        [name || pName, price || pPrice, quantity || pQuantity, minimumQuantity || pMinimumQuantity, imgUrl || pImgUrl, id],
+        [name || pName, price || pPrice, quantity || pQuantity, minimumQuantity ||
+        pMinimumQuantity, imgUrl || pImgUrl, id],
       );
 
       res.status(200).send({ message: 'Product details updated successfully' });
@@ -97,5 +114,5 @@ export default class ProductController {
     } catch ({ message }) {
       res.status(500).send({ error: { message } });
     }
-  }
-}
+  } */
+};

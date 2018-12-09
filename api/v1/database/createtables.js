@@ -21,7 +21,7 @@ console.log('Creating tables...');
       quantity integer NOT NULL,
       minimum_quantity integer NOT NULL,
       imgUrl text NOT NULL,
-      category VARCHAR(100),
+      category VARCHAR(100) DEFAULT NULL,
       created_at DATE DEFAULT CURRENT_DATE,
       updated_at DATE DEFAULT NULL)`);
 
