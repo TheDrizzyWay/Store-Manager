@@ -32,6 +32,22 @@ export default class Category {
     const text = 'SELECT * FROM categories WHERE id = $1';
     const values = [id];
     const { rows } = await pool.query(text, values);
-    return rows;
+    return rows[0];
+  }
+
+  static async updateCategory(id, category) {
+    const { name } = category;
+    const text = `UPDATE categories SET name = $1, updated_at = NOW() WHERE id = $2
+    RETURNING *`;
+    const values = [name, id];
+    const { rows } = await pool.query(text, values);
+    return rows[0];
+  }
+
+  static async deleteCategory(id) {
+    const text = 'DELETE FROM categories WHERE id = $1';
+    const values = [id];
+    const result = await pool.query(text, values);
+    return result;
   }
 }
