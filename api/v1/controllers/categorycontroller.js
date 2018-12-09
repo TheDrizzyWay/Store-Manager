@@ -15,14 +15,32 @@ export default {
     }
   },
 
-/*  static async getAllCategories(req, res) {
+  getAllCategories: async (req, res) => {
     try {
-      const result = await database.query('SELECT * FROM categories');
-      res.status(200).send(result.rows);
-    } catch ({ message }) {
-      res.status(500).send({ error: { message } });
+      const result = await Category.getAllCategories();
+      if (!result) {
+        return res.status(200).send({ success: false, message: 'No categories available yet' });
+      }
+      return res.status(200).send({ success: true, data: result });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
     }
-  }
+  },
+
+  getCategoryById: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const result = await Category.getCategoryById(id);
+      if (!result) {
+        return res.status(400).send({ success: false, message: 'Category not found' });
+      }
+      return res.status(200).send({ success: true, message: result });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
+    }
+  },
+
+/*
 
   static async getCategoryById(req, res) {
     const { id } = req.params;
