@@ -1,16 +1,19 @@
 import express from 'express';
 import productController from '../controllers/productcontroller';
 import { requireAuth, adminAuth } from '../middleware/authmiddleware';
+import idValidation from '../validations/idvalidation';
 
-const { createProduct } = productController;
+const {
+  createProduct, getAllProducts, getProductById, updateProduct, deleteProduct,
+} = productController;
+const { idValid } = idValidation;
+
 const router = express.Router();
 
 router.post('/', requireAuth, adminAuth, createProduct);
-/*
-router.get('/', requireAuth, productController.getAllProducts);
-router.get('/:id', requireAuth, productController.getProductById);
-router.put('/:id', requireAuth, adminAuth, productController.updateProduct);
-router.delete('/:id', requireAuth, adminAuth, productController.deleteProduct);
-*/
+router.get('/', requireAuth, getAllProducts);
+router.get('/:id', requireAuth, idValid, getProductById);
+router.put('/:id', requireAuth, adminAuth, idValid, updateProduct);
+router.delete('/:id', requireAuth, adminAuth, idValid, deleteProduct);
 
 export default router;

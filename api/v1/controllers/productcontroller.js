@@ -15,104 +15,68 @@ export default {
     }
   },
 
-/*
-    static async createProduct(req, res) {
-    const {
-      name = '', price = '', quantity = '', minimumQuantity = '', imgUrl,
-    } = req.body;
-
-    if (!name || !price || !quantity || !minimumQuantity || !imgUrl) {
-      res.status(400).send({ message: 'All fields are required.' });
-      return;
-    }
-
-    if (!validateUrl(imgUrl)) {
-      res.status(400).send({ message: 'Invalid image link.' });
-      return;
-    }
-
+  getAllProducts: async (req, res) => {
     try {
-      let result = await database.query('SELECT name FROM products WHERE name = $1', [name]);
-
-      if (result.rowCount > 0) {
-        res.status(409).send({ message: 'This product already exists.' });
-        return;
+      const result = await Product.getAllProducts();
+      if (result.length === 0) {
+        return res.status(200).send({ success: false, message: 'No products available yet' });
       }
-
-      result = await database.query(
-        `INSERT INTO products
-      (
-        name,
-        price,
-        quantity,
-        minimumQuantity,
-        imgUrl)
-        VALUES
-        ($1, $2, $3, $4, $5)
-      `,
-        [name, price, quantity, minimumQuantity, imgUrl],
-      );
-
-      res.status(201).send({ message: 'Product created successfully' });
-      return;
-    } catch ({ message }) {
-      res.status(500).send({ error: { message } });
+      return res.status(200).send({ success: true, data: result });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
     }
-  }
+  },
 
-  static async getAllProducts(req, res) {
+  getProductById: async (req, res) => {
     try {
-      const result = await database.query('SELECT * FROM products');
-      res.status(200).send(result.rows);
-    } catch ({ message }) {
-      res.status(500).send({ error: { message } });
+      const { id } = req.params;
+      const result = await Product.getProductById(id);
+      if (!result) {
+        return res.status(400).send({ success: false, message: 'Product not found' });
+      }
+      return res.status(200).send({ success: true, data: result });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
     }
-  }
+  },
 
-  static async getProductById(req, res) {
+  updateProduct: async (req, res) => {
     const { id } = req.params;
     try {
-      const result = await database.query('SELECT * FROM products WHERE id = $1', [id]);
-      if (result.rowCount <= 0) {
-        return res.status(400).send({ error: 'Product id not found'});
+      const product = await Product.getProductById(id);
+      if (!product) {
+        return res.status(400).send({ success: false, message: 'Product not found.' });
       }
-      return res.send(result.rows[0]);
-    } catch ({ message }) {
-      return res.status(500).send({ error: { message } });
+
+      product.name = req.body.name ? req.body.name : product.name;
+      product.description = req.body.description ? req.body.description : product.description;
+      product.price = req.body.price ? req.body.price : product.price;
+      product.quantity = req.body.quantity ? req.body.quantity : product.quantity;
+      product.minimum_quantity = req.body.minimum_quantity ? req.body.minimum_quantity : product.minimum_quantity;
+      product.imgUrl = req.body.imgUrl ? req.body.imgUrl : product.imgurl;
+
+      const result = await Product.updateProduct(id, product);
+      return res.status(200).send({
+        success: true,
+        message: 'Product updated successfully',
+        data: result,
+      });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
     }
-  }
+  },
 
-  static async updateProduct(req, res) {
-    const {
-      name: pName, price: pPrice, quantity: pQuantity, minimumQuantity: pMinimumQuantity, imgUrl: pImgUrl, id,
-    } = req.params;
-    const {
-      name, price, quantity, minimumQuantity, imgUrl,
-    } = req.body || {};
-
+  deleteProduct: async (req, res) => {
     try {
-      await database.query(
-        'UPDATE products SET name = $1, price = $2, quantity = $3, minimumQuantity = $4, imgUrl = $5 WHERE id = $6',
-        [name || pName, price || pPrice, quantity || pQuantity, minimumQuantity ||
-        pMinimumQuantity, imgUrl || pImgUrl, id],
-      );
-
-      res.status(200).send({ message: 'Product details updated successfully' });
-    } catch ({ message }) {
-      res.status(500).send({ error: { message } });
-    }
-  }
-
-  static async deleteProduct(req, res) {
-    const { id } = req.params;
-    try {
-      const result = await database.query('DELETE FROM products WHERE id = $1', [id]);
-      if (result.rowCount <= 0) {
-        res.status(400).send({ error: 'User not found' });
+      const { id } = req.params;
+      const findProduct = await Product.getProductById(id);
+      if (!findProduct) {
+        return res.status(400).send({ success: false, message: 'Product not found.' });
       }
-      res.status(204).send();
-    } catch ({ message }) {
-      res.status(500).send({ error: { message } });
+      await Product.deleteProduct(id);
+      return res.status(200).send({ success: true, message: 'Product deleted successfully.' });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
     }
-  } */
+  },
 };

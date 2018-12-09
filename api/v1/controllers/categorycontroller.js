@@ -34,7 +34,7 @@ export default {
       if (!result) {
         return res.status(400).send({ success: false, message: 'Category not found' });
       }
-      return res.status(200).send({ success: true, message: result });
+      return res.status(200).send({ success: true, data: result });
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }
@@ -48,7 +48,6 @@ export default {
         return res.status(400).send({ success: false, message: 'Category not found.' });
       }
       category.name = req.body.name;
-      // category.description = req.body.description ? req.body.description : category.description;
       const result = await Category.updateCategory(id, category);
       return res.status(200).send({
         success: true,

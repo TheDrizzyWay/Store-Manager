@@ -66,7 +66,6 @@ export default {
   getCurrentUser: async (req, res) => {
     try {
       const { id } = req.user;
-      // add logic to include sales for attendants
       const result = await User.getUserById(id);
       return res.status(200).send({ success: true, data: result });
     } catch (error) {
