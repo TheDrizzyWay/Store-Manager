@@ -46,6 +46,13 @@ export default class Product {
     return rows[0];
   }
 
+  static async getProductByName(name) {
+    const text = 'SELECT * FROM products WHERE name = $1';
+    const values = [name];
+    const { rows } = await pool.query(text, values);
+    return rows[0];
+  }
+
   static async updateProduct(id, product) {
     const {
       name, description, price, quantity, minimumQuantity, imgUrl,

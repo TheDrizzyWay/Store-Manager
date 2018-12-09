@@ -10,8 +10,8 @@ console.log('Creating tables...');
       email VARCHAR(100) UNIQUE NOT NULL,
       password VARCHAR(100) NOT NULL,
       role VARCHAR(20) NOT NULL,
-      created_at DATE DEFAULT CURRENT_DATE,
-      updated_at DATE DEFAULT NULL)`);
+      created_at TIMESTAMPTZ DEFAULT NOW(),
+      updated_at TIMESTAMPTZ DEFAULT NULL)`);
 
   await pool.query(`CREATE TABLE IF NOT EXISTS products(
       id UUID PRIMARY KEY,
@@ -22,14 +22,14 @@ console.log('Creating tables...');
       minimum_quantity integer NOT NULL,
       imgUrl text NOT NULL,
       category VARCHAR(100) DEFAULT NULL,
-      created_at DATE DEFAULT CURRENT_DATE,
+      created_at TIMESTAMPTZ DEFAULT NOW(),
       updated_at DATE DEFAULT NULL)`);
 
   await pool.query(`CREATE TABLE IF NOT EXISTS categories(
       id UUID PRIMARY KEY,
       name VARCHAR(50) UNIQUE NOT NULL,
-      created_at DATE DEFAULT CURRENT_DATE,
-      updated_at DATE DEFAULT NULL)`);
+      created_at TIMESTAMPTZ DEFAULT NOW(),
+      updated_at TIMESTAMPTZ DEFAULT NULL)`);
 
   await pool.query(`CREATE TABLE IF NOT EXISTS sales(
       sale_id UUID PRIMARY KEY,
@@ -38,6 +38,6 @@ console.log('Creating tables...');
       quantity_sold integer NOT NULL,
       total float NOT NULL,
       seller_id UUID NOT NULL,
-      sold_at DATE DEFAULT CURRENT_DATE,
+      sold_at TIMESTAMPTZ DEFAULT NOW(),
       FOREIGN KEY (seller_id) REFERENCES users (id) ON DELETE CASCADE)`);
 })();
