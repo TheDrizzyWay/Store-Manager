@@ -48,12 +48,16 @@ export default {
         return res.status(400).send({ success: false, message: 'Product not found.' });
       }
 
-      product.name = req.body.name ? req.body.name : product.name;
-      product.description = req.body.description ? req.body.description : product.description;
-      product.price = req.body.price ? req.body.price : product.price;
-      product.quantity = req.body.quantity ? req.body.quantity : product.quantity;
-      product.minimum_quantity = req.body.minimum_quantity ? req.body.minimum_quantity : product.minimum_quantity;
-      product.imgUrl = req.body.imgUrl ? req.body.imgUrl : product.imgurl;
+      const {
+        name, description, price, quantity, minimumQuantity, imgUrl,
+      } = req.body;
+
+      product.name = name || product.name;
+      product.description = description || product.description;
+      product.price = price || product.price;
+      product.quantity = quantity || product.quantity;
+      product.minimumQuantity = minimumQuantity || product.minimum_quantity;
+      product.imgUrl = imgUrl || product.imgurl;
 
       const result = await Product.updateProduct(id, product);
       return res.status(200).send({

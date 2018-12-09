@@ -10,16 +10,16 @@ export default class Product {
     this.description = product.description;
     this.price = product.price;
     this.quantity = product.quantity;
-    this.minimum_quantity = product.minimum_quantity;
+    this.minimumQuantity = product.minimumQuantity;
     this.imgUrl = product.imgUrl;
     if (product.category || product.category == null) {
       this.category = product.category;
     }
-    if (product.created_at) {
-      this.created_at = product.created_at;
+    if (product.createdAt) {
+      this.createdAt = product.createdAt;
     }
-    if (product.updated_at || product.updated_at == null) {
-      this.updated_at = product.updated_at;
+    if (product.updatedAt || product.updatedAt == null) {
+      this.updatedAt = product.updatedAt;
     }
   }
 
@@ -28,7 +28,7 @@ export default class Product {
       quantity, minimum_quantity, imgUrl) VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *`;
     const values = [uuid.v4(), this.name, this.description, this.price,
-      this.quantity, this.minimum_quantity, this.imgUrl];
+      this.quantity, this.minimumQuantity, this.imgUrl];
     const { rows } = await pool.query(text, values);
     return rows[0];
   }
@@ -48,9 +48,8 @@ export default class Product {
 
   static async updateProduct(id, product) {
     const {
-      name, description, price, quantity, imgUrl,
+      name, description, price, quantity, minimumQuantity, imgUrl,
     } = product;
-    const minimumQuantity = product.minimum_quantity;
     const text = `UPDATE products SET name = $1, description = $2,
     price = $3, quantity = $4, minimum_quantity = $5, imgUrl =$6,
     updated_at = NOW() WHERE id = $7 RETURNING *`;

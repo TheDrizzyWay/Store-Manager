@@ -27,13 +27,15 @@ export default {
   },
 
   signUpValid: async (req, res, next) => {
-    const user = req.body;
+    const {
+      firstName, lastName, email, password, role,
+    } = req.body;
     const errors = [];
-    const newFirstName = user.first_name.trim().toUpperCase();
-    const newLastName = user.last_name.trim().toUpperCase();
-    const newEmail = user.email.trim();
-    const newPassword = user.password.trim();
-    const newRole = user.role.trim();
+    const newFirstName = firstName.trim().toUpperCase();
+    const newLastName = lastName.trim().toUpperCase();
+    const newEmail = email.trim();
+    const newPassword = password.trim();
+    const newRole = role.trim();
 
     if (!newFirstName || validator.isEmpty(newFirstName)
     || !newLastName || validator.isEmpty(newLastName)
@@ -72,8 +74,8 @@ export default {
         data: errors,
       });
     }
-    req.body.first_name = newFirstName;
-    req.body.last_name = newLastName;
+    req.body.firstName = newFirstName;
+    req.body.lastName = newLastName;
     req.body.email = newEmail;
     req.body.password = newPassword;
     req.body.role = newRole;

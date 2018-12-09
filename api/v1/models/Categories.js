@@ -7,11 +7,11 @@ export default class Category {
       this.id = category.id;
     }
     this.name = category.name;
-    if (category.created_at) {
-      this.created_at = category.created_at;
+    if (category.createdAt) {
+      this.createdAt = category.createdAt;
     }
-    if (category.updated_at || category.updated_at == null) {
-      this.updated_at = category.updated_at;
+    if (category.updatedAt || category.updatedAt == null) {
+      this.updatedAt = category.updatedAt;
     }
   }
 
@@ -44,8 +44,8 @@ export default class Category {
 
   static async updateCategory(id, category) {
     const { name } = category;
-    const text = `UPDATE categories SET name = $1, updated_at = NOW() WHERE id = $2
-    RETURNING *`;
+    const text = `UPDATE categories SET name = $1, updated_at = NOW()
+    WHERE id = $2 RETURNING *`;
     const values = [name, id];
     const { rows } = await pool.query(text, values);
     return rows[0];

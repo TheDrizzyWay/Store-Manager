@@ -6,23 +6,23 @@ export default class User {
     if (user.id) {
       this.id = user.id;
     }
-    this.first_name = user.first_name;
-    this.last_name = user.last_name;
+    this.firstName = user.firstName;
+    this.lastName = user.lastName;
     this.email = user.email;
     this.password = user.password;
     this.role = user.role;
-    if (user.created_at) {
-      this.created_at = user.created_at;
+    if (user.createdAt) {
+      this.createdAt = user.createdAt;
     }
-    if (user.updated_at || user.updated_at == null) {
-      this.updated_at = user.updated_at;
+    if (user.updatedAt || user.updatedAt == null) {
+      this.updatedAt = user.updatedAt;
     }
   }
 
   async signUp() {
     const text = `INSERT INTO users (id, first_name, last_name, email,
     password, role) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
-    const values = [uuid.v4(), this.first_name, this.last_name, this.email,
+    const values = [uuid.v4(), this.firstName, this.lastName, this.email,
       this.password, this.role];
     const { rows } = await pool.query(text, values);
     return rows[0];
