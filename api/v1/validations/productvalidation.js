@@ -13,14 +13,15 @@ export default {
     const newDescription = description.trim();
     const newImgUrl = imgUrl.trim();
 
-    if (!newName || validator.isEmpty(newName)
-    || !newDescription || validator.isEmpty(newDescription)
-    || !price || validator.isEmpty(price)
-    || !quantity || validator.isEmpty(quantity)
-    || !minimumQuantity || validator.isEmpty(minimumQuantity)
-    || !newImgUrl || validator.isEmpty(newImgUrl)) {
-      return res.status(400).send({ success: false, message: 'Please fill in all fields.' });
-    }
+    const fields = [newName, newDescription, price, quantity, minimumQuantity, newImgUrl];
+    let emptyField;
+    fields.map((field) => {
+      if (!field || validator.isEmpty(field)) {
+        emptyField = true;
+      }
+      return emptyField;
+    });
+    if (emptyField) return res.status(400).send({ success: false, message: 'Please fill in all fields.' });
 
     if (checkInput.test(newName)) {
       errors.push('Product name should contain only alphabets and numbers.');

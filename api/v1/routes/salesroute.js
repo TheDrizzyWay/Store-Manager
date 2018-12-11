@@ -4,8 +4,8 @@ import { requireAuth, attendantAuth, adminAuth } from '../middleware/authmiddlew
 
 const router = express.Router();
 
-router.post('/', salesController.createSale);
+/* router.post('/', salesController.createSale);
 router.get('/', requireAuth, adminAuth, salesController.getAllSales);
-router.get('/:id', attendantAuth, salesController.getMySales);
+router.get('/:id', attendantAuth, salesController.getMySales); */
 
 export default router;

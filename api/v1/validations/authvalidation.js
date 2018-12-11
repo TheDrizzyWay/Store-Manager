@@ -35,15 +35,17 @@ export default {
     const newLastName = lastName.trim().toUpperCase();
     const newEmail = email.trim();
     const newPassword = password.trim();
-    const newRole = role.trim();
+    const newRole = role.trim().toLowerCase();
 
-    if (!newFirstName || validator.isEmpty(newFirstName)
-    || !newLastName || validator.isEmpty(newLastName)
-    || !newEmail || validator.isEmpty(newEmail)
-    || !newPassword || validator.isEmpty(newPassword)
-    || !newRole || validator.isEmpty(newRole)) {
-      return res.status(400).send({ success: false, message: 'Please fill in all fields.' });
-    }
+    const fields = [newFirstName, newLastName, newEmail, newPassword, newRole];
+    let emptyField;
+    fields.map((field) => {
+      if (!field || validator.isEmpty(field)) {
+        emptyField = true;
+      }
+      return emptyField;
+    });
+    if (emptyField) return res.status(400).send({ success: false, message: 'Please fill in all fields.' });
     if (!validator.isAlpha(newFirstName)) {
       errors.push('Your first name should contain only alphabets.');
     }
