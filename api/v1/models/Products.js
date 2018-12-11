@@ -71,4 +71,11 @@ export default class Product {
     const result = await pool.query(text, values);
     return result;
   }
+
+  static async updateProductQuantity(id, data) {
+    const text = 'UPDATE products SET quantity = $1 WHERE id = $2';
+    const values = [data, id];
+    const result = await pool.query(text, values);
+    return result;
+  }
 }

@@ -9,7 +9,7 @@ export default class Sale {
     this.name = sale.name;
     this.price = sale.price;
     this.quantitySold = sale.quantitySold;
-    this.total = sale.total;
+    this.total = sale.saleTotal;
     this.sellerId = sale.sellerId;
     if (sale.soldAt) {
       this.soldAt = sale.soldAt;
@@ -21,6 +21,26 @@ export default class Sale {
       total, seller_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
     const values = [uuid.v4(), this.name, this.price, this.quantitySold,
       this.total, this.sellerId];
+    const { rows } = await pool.query(text, values);
+    return rows[0];
+  }
+
+  static async getAllSalesAdmin() {
+    const text = 'SELECT * FROM sales';
+    const { rows } = await pool.query(text);
+    return rows;
+  }
+
+  static async getAllSalesAttendant(id) {
+    const text = 'SELECT * FROM sales WHERE seller_id = $1';
+    const values = [id];
+    const { rows } = await pool.query(text, values);
+    return rows;
+  }
+
+  static async getSaleById(id) {
+    const text = 'SELECT * FROM sales WHERE sale_id = $1';
+    const values = [id];
     const { rows } = await pool.query(text, values);
     return rows[0];
   }

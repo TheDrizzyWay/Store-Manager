@@ -67,7 +67,7 @@ export default {
         return res.status(400).send({ success: false, message: 'Category not found.' });
       }
       await Category.deleteCategory(id);
-      return res.status(200).send({ success: true, message: 'Category deleted successfully.' });
+      return res.status(204).send({ success: true, message: 'Category deleted successfully.' });
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }

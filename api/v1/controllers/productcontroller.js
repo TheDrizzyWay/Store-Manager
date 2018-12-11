@@ -77,7 +77,7 @@ export default {
         return res.status(400).send({ success: false, message: 'Product not found.' });
       }
       await Product.deleteProduct(id);
-      return res.status(200).send({ success: true, message: 'Product deleted successfully.' });
+      return res.status(204).send({ success: true, message: 'Product deleted successfully.' });
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }
