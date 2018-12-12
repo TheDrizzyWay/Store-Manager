@@ -1,5 +1,5 @@
 import express from 'express';
-import path from 'path';
+// import path from 'path';
 
 import router from './v1/routes';
 
@@ -13,6 +13,9 @@ app.use('/', router);
 
 app.get('/', (req, res) => {
   res.status(200).send('Welcome to the Store Manager API!');
+});
+app.all('/*', (req, res) => {
+  res.status(404).send({ message: 'This route does not exist.' });
 });
 
 const port = process.env.PORT || 3000;

@@ -23,7 +23,7 @@ console.log('Creating tables...');
       imgUrl text NOT NULL,
       category VARCHAR(100) DEFAULT NULL,
       created_at TIMESTAMPTZ DEFAULT NOW(),
-      updated_at DATE DEFAULT NULL)`);
+      updated_at TIMESTAMPTZ DEFAULT NULL)`);
 
   await pool.query(`CREATE TABLE IF NOT EXISTS categories(
       id UUID PRIMARY KEY,
