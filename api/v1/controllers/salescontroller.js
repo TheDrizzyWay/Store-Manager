@@ -6,19 +6,24 @@ export default {
     let counter = 0;
     const { sales } = req.body;
     const productLength = sales.length;
-
+    const resultArray = [];
     sales.forEach(async (sale) => {
       const { productId, newQuantity } = sale;
       const newSale = new Sale(sale);
       try {
-        await newSale.createSale();
+        const result = await newSale.createSale();
         await Product.updateProductQuantity(productId, newQuantity);
+        resultArray.push(result);
         counter += 1;
       } catch (error) {
         return res.status(500).send({ success: false, message: error.message });
       }
       if (counter === productLength) {
-        return res.status(201).send({ success: true, message: 'Transaction completed successfully.' });
+        return res.status(201).send({
+          success: true,
+          message: 'Transaction completed successfully.',
+          data: resultArray,
+        });
       }
       return true;
     });

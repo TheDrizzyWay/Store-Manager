@@ -5,7 +5,10 @@ export default {
     const { id } = req.params;
 
     if (!isUUID(id, 4)) {
-      return res.status(422).send({ success: false, message: 'Please insert a valid id' });
+      return res.status(422).send({
+        success: false,
+        message: 'Please insert a valid id',
+      });
     }
     return next();
   },

@@ -1,5 +1,7 @@
 import validator from 'validator';
 
+const convertText = a => (a.charAt(0).toUpperCase() + a.slice(1)).trim();
+
 export default {
   createSaleValid: (req, res, next) => {
     const { sales } = req.body;
@@ -9,7 +11,7 @@ export default {
 
     sales.forEach((sale) => {
       const { name, quantitySold } = sale;
-      const newName = name.trim().toUpperCase();
+      const newName = convertText(name);
       const newQuantitySold = quantitySold.trim();
 
       if (!newName || validator.isEmpty(newName)) {

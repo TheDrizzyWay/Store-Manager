@@ -1,6 +1,8 @@
 import validator from 'validator';
 import User from '../models/Users';
 
+const convertText = a => (a.charAt(0).toUpperCase() + a.slice(1)).trim();
+
 export default {
   logInValid: (req, res, next) => {
     const { email, password } = req.body;
@@ -31,8 +33,8 @@ export default {
       firstName, lastName, email, password, role,
     } = req.body;
     const errors = [];
-    const newFirstName = firstName.trim().toUpperCase();
-    const newLastName = lastName.trim().toUpperCase();
+    const newFirstName = convertText(firstName);
+    const newLastName = convertText(lastName);
     const newEmail = email.trim();
     const newPassword = password.trim();
     const newRole = role.trim().toLowerCase();

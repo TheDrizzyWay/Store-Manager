@@ -1,11 +1,13 @@
 import validator from 'validator';
 import Category from '../models/Categories';
 
+const convertText = a => (a.charAt(0).toUpperCase() + a.slice(1)).trim();
+
 export default {
   createCategoryValid: async (req, res, next) => {
     const { name } = req.body;
     const errors = [];
-    const newName = name.trim().toUpperCase();
+    const newName = convertText(name);
     const checkInput = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
 
     if (!newName || validator.isEmpty(newName)) {

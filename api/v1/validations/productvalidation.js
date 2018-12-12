@@ -1,6 +1,8 @@
 import validator from 'validator';
 import Product from '../models/Products';
 
+const convertText = a => (a.charAt(0).toUpperCase() + a.slice(1)).trim();
+
 export default {
   createProductValid: async (req, res, next) => {
     const {
@@ -9,7 +11,7 @@ export default {
     const errors = [];
     const checkInput = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
     const checkImgUrl = /(http(s?):(\/){2})([^/])([/.\w\s-])*\.(?:jpg|png)/g;
-    const newName = name.trim().toUpperCase();
+    const newName = convertText(name);
     const newDescription = description.trim();
     const newImgUrl = imgUrl.trim();
 
@@ -89,7 +91,7 @@ export default {
       return res.status(400).send({ success: false, message: 'Please fill in one or more fields.' });
     }
     if (name) {
-      const newName = name.trim().toUpperCase();
+      const newName = convertText(name);
       if (checkInput.test(newName)) {
         errors.push('Product name should contain only alphabets and numbers.');
       }
