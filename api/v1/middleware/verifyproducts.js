@@ -1,7 +1,7 @@
 import Product from '../models/Products';
 
 export default {
-  verifyProducts: (req, res, next) => {
+  verify: (req, res, next) => {
     const { sales } = req.body;
     const sellerId = req.user.id;
     let counter = 0;
@@ -25,6 +25,7 @@ export default {
         }
         total = price * quantitySold;
         newQuantity = quantity - quantitySold;
+        sales[counter].price = price;
         sales[counter].saleTotal = total;
         sales[counter].productId = id;
         sales[counter].sellerId = sellerId;

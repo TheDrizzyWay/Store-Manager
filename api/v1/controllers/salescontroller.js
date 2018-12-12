@@ -11,11 +11,8 @@ export default {
       const { productId, newQuantity } = sale;
       const newSale = new Sale(sale);
       try {
-        const result1 = await newSale.createSale();
-        const result2 = await Product.updateProductQuantity(productId, newQuantity);
-        if (!result1 || !result2) {
-          return res.status(500).send({ success: false, message: 'Something went wrong.' });
-        }
+        await newSale.createSale();
+        await Product.updateProductQuantity(productId, newQuantity);
         counter += 1;
       } catch (error) {
         return res.status(500).send({ success: false, message: error.message });

@@ -6,6 +6,7 @@ export default class Sale {
     if (sale.id) {
       this.id = sale.id;
     }
+    this.productId = sale.productId;
     this.name = sale.name;
     this.price = sale.price;
     this.quantitySold = sale.quantitySold;
@@ -17,9 +18,9 @@ export default class Sale {
   }
 
   async createSale() {
-    const text = `INSERT INTO sales (sale_id, name, price, quantity_sold,
-      total, seller_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
-    const values = [uuid.v4(), this.name, this.price, this.quantitySold,
+    const text = `INSERT INTO sales (sale_id, product_id, name, price, quantity_sold,
+      total, seller_id) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+    const values = [uuid.v4(), this.productId, this.name, this.price, this.quantitySold,
       this.total, this.sellerId];
     const { rows } = await pool.query(text, values);
     return rows[0];

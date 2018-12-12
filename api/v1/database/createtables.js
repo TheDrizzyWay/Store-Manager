@@ -33,11 +33,13 @@ console.log('Creating tables...');
 
   await pool.query(`CREATE TABLE IF NOT EXISTS sales(
       sale_id UUID PRIMARY KEY,
+      product_id UUID NOT NULL,
       name VARCHAR(50) NOT NULL,
       price float NOT NULL,
       quantity_sold integer NOT NULL,
       total float NOT NULL,
       seller_id UUID NOT NULL,
       sold_at TIMESTAMPTZ DEFAULT NOW(),
+      FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE,
       FOREIGN KEY (seller_id) REFERENCES users (id) ON DELETE CASCADE)`);
 })();

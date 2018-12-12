@@ -19,7 +19,7 @@ export default {
     try {
       const result = await Product.getAllProducts();
       if (result.length === 0) {
-        return res.status(200).send({ success: false, message: 'No products available yet' });
+        return res.status(200).send({ success: true, message: 'No products available yet' });
       }
       return res.status(200).send({ success: true, data: result });
     } catch (error) {
@@ -77,7 +77,7 @@ export default {
         return res.status(400).send({ success: false, message: 'Product not found.' });
       }
       await Product.deleteProduct(id);
-      return res.status(204).send({ success: true, message: 'Product deleted successfully.' });
+      return res.status(200).send({ success: true, message: 'Product deleted successfully.' });
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }

@@ -81,7 +81,7 @@ export default {
         return res.status(400).send({ success: false, message: 'User not found.' });
       }
       await User.deleteUser(id);
-      return res.status(204).send({ success: true, message: 'User deleted successfully.' });
+      return res.status(200).send({ success: true, message: 'User deleted successfully.' });
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }

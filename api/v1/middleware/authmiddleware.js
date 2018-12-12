@@ -32,8 +32,8 @@ export const adminAuth = (req, res, next) => {
 
 export const attendantAuth = (req, res, next) => {
   const { role } = req.user;
-  if (role !== 'Attendant') {
-    return res.status(403).send({ success: false, message: 'Access Denied.' });
+  if (role !== 'attendant') {
+    return res.status(403).send({ success: false, message: 'Access Denied. For attendants only.' });
   }
   return next();
 };
