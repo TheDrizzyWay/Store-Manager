@@ -48,17 +48,14 @@ describe('Authentication', () => {
         });
     });
 
-  /*  it('should return 200 for successfull login', (done) => {
-      chai.request(app)
+    it('should return 200 for successfull login', async () => {
+      const res = await chai.request(app)
         .post('/api/v1/auth/login')
-        .send(correctLogin)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res).to.have.status(200);
-          expect(res.body.success).to.equal(true);
-          expect(res.body).to.have.property('token');
-          return done();
-        });
-    }); */
+        .send(correctLogin);
+
+      expect(res).to.have.status(200);
+      expect(res.body.success).to.equal(true);
+      expect(res.body).to.have.property('token');
+    });
   });
 });
