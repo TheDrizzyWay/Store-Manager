@@ -6,18 +6,14 @@ dotenv.config();
 const { JWT_SECRET } = process.env;
 
 export default class Hashes {
-  static generateToken(payload) {
-    return new Promise((resolve, reject) => jwt.sign(payload, JWT_SECRET, { expiresIn: '3d' }, (err, token) => {
-      if (err) return reject();
-      return resolve(token);
-    }));
+  static async generateToken(payload) {
+    const token = await jwt.sign(payload, JWT_SECRET, { expiresIn: '120d' });
+    return token;
   }
 
-  static verifyToken(token) {
-    return new Promise((resolve, reject) => jwt.verify(token, JWT_SECRET, (err, decoded) => {
-      if (err) return reject();
-      return resolve(decoded);
-    }));
+  static async verifyToken(token) {
+    const decoded = await jwt.verify(token, JWT_SECRET);
+    return decoded;
   }
 
   static hashPassword(password) {

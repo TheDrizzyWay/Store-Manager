@@ -85,7 +85,7 @@ export default {
     try {
       const result = await User.logIn(newEmail);
       if (result) {
-        return res.status(400).send({ success: false, message: 'This email address is already taken' });
+        return res.status(400).send({ success: false, message: 'This email address is already taken.' });
       }
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });

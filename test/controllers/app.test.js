@@ -6,26 +6,20 @@ chai.use(chaiHttp);
 
 describe('App', () => {
   describe('GET / - API welcome page', () => {
-    it('Should display welcome page', (done) => {
-      chai.request(app)
-        .get('/')
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res).to.have.status(200);
-          return done();
-        });
+    it('Should display welcome page', async () => {
+      const res = await chai.request(app)
+        .get('/');
+
+      expect(res).to.have.status(200);
     });
   });
 
   describe('GET /* - Non-existent routes', () => {
-    it('Should display an error for non-existent routes', (done) => {
-      chai.request(app)
-        .get('/whatever2')
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res).to.have.status(404);
-          return done();
-        });
+    it('Should display an error for non-existent routes', async () => {
+      const res = await chai.request(app)
+        .get('/whatever2');
+
+      expect(res).to.have.status(404);
     });
   });
 });
