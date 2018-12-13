@@ -7,13 +7,11 @@ export default {
   logInValid: (req, res, next) => {
     const { email, password } = req.body;
     const errors = [];
-    const newEmail = email.trim();
-    const newPassword = password.trim();
 
-    if (!newEmail || validator.isEmpty(newEmail)) {
+    if (!email || validator.isEmpty(email)) {
       errors.push('Please insert your email address.');
     }
-    if (!newPassword || validator.isEmpty(newPassword)) {
+    if (!password || validator.isEmpty(password)) {
       errors.push('Please insert your password.');
     }
     if (errors.length > 0) {
@@ -23,8 +21,8 @@ export default {
         data: errors,
       });
     }
-    req.body.email = newEmail;
-    req.body.password = newPassword;
+    req.body.email = email.trim();
+    req.body.password = password.trim();
     return next();
   },
 

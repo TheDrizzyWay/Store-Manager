@@ -20,7 +20,7 @@ describe('App', () => {
   describe('GET /* - Non-existent routes', () => {
     it('Should display an error for non-existent routes', (done) => {
       chai.request(app)
-        .get('/whatever')
+        .get('/whatever2')
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
