@@ -78,4 +78,13 @@ export default class Product {
     const result = await pool.query(text, values);
     return result;
   }
+
+  static async getProductSales(id) {
+    const text = `SELECT p.id, p.name, p.price, s.quantity_sold, s.total,
+    s.sold_at FROM products p INNER JOIN sales s ON p.id = s.product_id
+    WHERE p.id = $1`;
+    const values = [id];
+    const { rows } = await pool.query(text, values);
+    return rows;
+  }
 }

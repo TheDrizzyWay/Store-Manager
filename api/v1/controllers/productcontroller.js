@@ -19,7 +19,7 @@ export default {
     try {
       const result = await Product.getAllProducts();
       if (result.length === 0) {
-        return res.status(200).send({ success: true, message: 'No products available yet' });
+        return res.status(200).send({ success: false, message: 'No products available yet' });
       }
       return res.status(200).send({ success: true, data: result });
     } catch (error) {
@@ -78,6 +78,23 @@ export default {
       }
       await Product.deleteProduct(id);
       return res.status(200).send({ success: true, message: 'Product deleted successfully.' });
+    } catch (error) {
+      return res.status(500).send({ success: false, message: error.message });
+    }
+  },
+
+  getProductSales: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const findProduct = await Product.getProductById(id);
+      if (!findProduct) {
+        return res.status(400).send({ success: false, message: 'Product not found.' });
+      }
+      const result = await Product.getProductSales(id);
+      if (result.length === 0) {
+        return res.status(200).send({ success: true, message: 'No records for this product.' });
+      }
+      return res.status(200).send({ success: true, data: result });
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }
