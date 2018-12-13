@@ -9,43 +9,34 @@ chai.use(chaiHttp);
 
 describe('Authentication', () => {
   describe('login', () => {
-    it('should return 400 if one or more fields are missing', (done) => {
-      chai.request(app)
+    it('should return 400 if one or more fields are missing', async () => {
+      const res = await chai.request(app)
         .post('/api/v1/auth/login')
-        .send(missingFieldLogin)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res).to.have.status(400);
-          expect(res.body.success).to.equal(false);
-          expect(res.body).to.have.property('data');
-          return done();
-        });
+        .send(missingFieldLogin);
+
+      expect(res).to.have.status(400);
+      expect(res.body.success).to.equal(false);
+      expect(res.body).to.have.property('data');
     });
 
-    it('should return 401 if user account not found', (done) => {
-      chai.request(app)
+    it('should return 401 if user account not found', async () => {
+      const res = await chai.request(app)
         .post('/api/v1/auth/login')
-        .send(notExistLogin)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res).to.have.status(401);
-          expect(res.body.success).to.equal(false);
-          expect(res.body).to.have.property('message');
-          return done();
-        });
+        .send(notExistLogin);
+
+      expect(res).to.have.status(401);
+      expect(res.body.success).to.equal(false);
+      expect(res.body).to.have.property('message');
     });
 
-    it('should return 401 if password is incorrect', (done) => {
-      chai.request(app)
+    it('should return 401 if password is incorrect', async () => {
+      const res = await chai.request(app)
         .post('/api/v1/auth/login')
-        .send(wrongPassword)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res).to.have.status(401);
-          expect(res.body.success).to.equal(false);
-          expect(res.body.message).to.eql('Invalid email/password combination.');
-          return done();
-        });
+        .send(wrongPassword);
+
+      expect(res).to.have.status(401);
+      expect(res.body.success).to.equal(false);
+      expect(res.body.message).to.eql('Invalid email/password combination.');
     });
 
     it('should return 200 for successfull login', async () => {
@@ -53,6 +44,7 @@ describe('Authentication', () => {
         .post('/api/v1/auth/login')
         .send(correctLogin);
 
+      console.log(res.body);
       expect(res).to.have.status(200);
       expect(res.body.success).to.equal(true);
       expect(res.body).to.have.property('token');
