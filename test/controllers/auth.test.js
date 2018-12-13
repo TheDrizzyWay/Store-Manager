@@ -43,12 +43,12 @@ describe('Authentication', () => {
           if (err) return done(err);
           expect(res).to.have.status(401);
           expect(res.body.success).to.equal(false);
-          // expect(res.body.message).to.eql('Invalid email/password combination.');
+          expect(res.body.message).to.eql('Invalid email/password combination.');
           return done();
         });
     });
 
-    it('should return 200 for successfull login', (done) => {
+  /*  it('should return 200 for successfull login', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send(correctLogin)
@@ -59,6 +59,6 @@ describe('Authentication', () => {
           expect(res.body).to.have.property('token');
           return done();
         });
-    });
+    }); */
   });
 });
