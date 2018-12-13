@@ -7,7 +7,7 @@ cache:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database store-manager;' -U postgres
+  - psql -c 'create database storemanager;' -U postgres
 script:
     - npm test
 after_success:
