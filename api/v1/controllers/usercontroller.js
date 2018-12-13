@@ -37,7 +37,7 @@ export default {
       const token = await hashes.generateToken({ id, role });
       return res.status(200).send({ success: true, message: 'You are now logged in.', token });
     } catch (error) {
-      return res.status(500).send({ success: false, message: error.message });
+      return res.status(500).send({ success: false, message: error });
     }
   },
 

@@ -44,7 +44,6 @@ describe('Authentication', () => {
         .post('/api/v1/auth/login')
         .send(correctLogin);
 
-      console.log(res.body);
       expect(res).to.have.status(200);
       expect(res.body.success).to.equal(true);
       expect(res.body).to.have.property('token');
