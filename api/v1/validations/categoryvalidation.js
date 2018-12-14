@@ -30,7 +30,7 @@ export default {
     try {
       const result = await Category.getCategoryByName(newName);
       if (result) {
-        res.status(400).send({ success: false, message: 'This category already exists' });
+        return res.status(400).send({ success: false, message: 'This category already exists.' });
       }
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });

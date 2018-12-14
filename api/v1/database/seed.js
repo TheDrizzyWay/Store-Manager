@@ -1,4 +1,3 @@
-// import uuid from 'uuid';
 import hashes from '../middleware/hashes';
 import pool from './dbconfig';
 
@@ -28,6 +27,32 @@ console.log('seeding database');
   try {
     result = await pool.query(`INSERT INTO users (id, first_name, last_name, email, password, role)
       VALUES ($1, $2, $3, $4, $5, $6)`, params);
+    return result;
+  } catch (error) {
+    return error;
+  }
+})();
+
+(async () => {
+  const id = '59968089-65d6-438a-b5d3-03ae275fa2de';
+  const params = [id, 'Predator series'];
+  let result;
+  try {
+    result = await pool.query(`INSERT INTO categories (id, name)
+      VALUES ($1, $2)`, params);
+    return result;
+  } catch (error) {
+    return error;
+  }
+})();
+
+(async () => {
+  const id = '620417b7-ab15-4679-9e5f-94e484ac9887';
+  const params = [id, 'X series'];
+  let result;
+  try {
+    result = await pool.query(`INSERT INTO categories (id, name)
+      VALUES ($1, $2)`, params);
     return result;
   } catch (error) {
     return error;

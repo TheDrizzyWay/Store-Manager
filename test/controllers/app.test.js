@@ -23,5 +23,3 @@ describe('App', () => {
     });
   });
 });
-
-// "pretest": "npm run migrations && npm run seed",
