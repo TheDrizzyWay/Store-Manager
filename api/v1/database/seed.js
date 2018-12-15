@@ -58,3 +58,31 @@ console.log('seeding database');
     return error;
   }
 })();
+
+(async () => {
+  const id = '5a1f3030-cb52-462a-a81c-ab53f115ed21';
+  const params = [id, 'adidas predator boot', 'predator description', '15000', '10',
+    '2', 'http://sampleimage.com/image1.png'];
+  let result;
+  try {
+    result = await pool.query(`INSERT INTO products (id, name, description, price, quantity, minimum_quantity, imgurl)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)`, params);
+    return result;
+  } catch (error) {
+    return error;
+  }
+})();
+
+(async () => {
+  const id = '6522cc1b-c322-462a-97c1-0abd063135c6';
+  const params = [id, 'Adidas x boot', 'x description', '10000', '10',
+    '3', 'http://sampleimage.com/image1.jpg'];
+  let result;
+  try {
+    result = await pool.query(`INSERT INTO products (id, name, description, price, quantity, minimum_quantity, imgurl)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)`, params);
+    return result;
+  } catch (error) {
+    return error;
+  }
+})();

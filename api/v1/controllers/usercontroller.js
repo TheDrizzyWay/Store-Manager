@@ -67,6 +67,7 @@ export default {
     try {
       const { id } = req.user;
       const result = await User.getUserById(id);
+      // find user first
       return res.status(200).send({ success: true, data: result });
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });

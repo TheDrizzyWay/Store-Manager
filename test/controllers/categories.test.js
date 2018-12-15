@@ -1,16 +1,33 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
-import { adminToken, attendantToken } from '../mockdata/authdata';
+import { correctLogin, attendantLogin } from '../mockdata/authdata';
 import {
   validCategory, invalidCategory, invalidData,
   existingCategory, validId, invalidId,
-  notExistId,
+  notExistId, updateCategory,
 } from '../mockdata/categorydata';
 
 chai.use(chaiHttp);
+let adminToken;
+let attendantToken;
 
 describe('Categories', () => {
+  before(async () => {
+    const response = await chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send(correctLogin);
+
+    adminToken = response.body.token;
+
+    const attendantResponse = await chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send(attendantLogin);
+    attendantToken = attendantResponse.body.token;
+  });
+
   describe('POST /categories', () => {
     it('should return 401 if no token is received', async () => {
       const res = await chai.request(app)
@@ -130,6 +147,49 @@ describe('Categories', () => {
       expect(res).to.have.status(200);
       expect(res.body.success).to.equal(true);
       expect(res.body).to.have.property('data');
+    });
+  });
+
+  describe('PUT /categories/:id', () => {
+    it('should return 400 if id does not exist', async () => {
+      const res = await chai.request(app)
+        .put(`/api/v1/categories/${notExistId}`)
+        .set({ Authorization: `Bearer ${adminToken}` })
+        .send(updateCategory);
+
+      expect(res).to.have.status(400);
+      expect(res.body.success).to.equal(false);
+    });
+
+    it('should update a category and return 200', async () => {
+      const res = await chai.request(app)
+        .put(`/api/v1/categories/${validId}`)
+        .set({ Authorization: `Bearer ${adminToken}` })
+        .send(updateCategory);
+
+      expect(res).to.have.status(200);
+      expect(res.body.success).to.equal(true);
+      expect(res.body).to.have.property('data');
+    });
+  });
+
+  describe('DELETE /categories/:id', () => {
+    it('should return 400 if id does not exist', async () => {
+      const res = await chai.request(app)
+        .delete(`/api/v1/categories/${notExistId}`)
+        .set({ Authorization: `Bearer ${adminToken}` });
+
+      expect(res).to.have.status(400);
+      expect(res.body.success).to.equal(false);
+    });
+
+    it('should delete a category and return 200', async () => {
+      const res = await chai.request(app)
+        .delete(`/api/v1/categories/${validId}`)
+        .set({ Authorization: `Bearer ${adminToken}` });
+
+      expect(res).to.have.status(200);
+      expect(res.body.success).to.equal(true);
     });
   });
 });

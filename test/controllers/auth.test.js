@@ -3,14 +3,30 @@ import chaiHttp from 'chai-http';
 import app from '../../api/app';
 import {
   missingFieldLogin, notExistLogin, wrongPassword,
-  correctLogin, missingFieldSignup, adminToken,
-  attendantToken, invalidSignupData, existingEmail,
-  validSignupData,
+  correctLogin, missingFieldSignup, invalidSignupData,
+  existingEmail, validSignupData, attendantLogin,
 } from '../mockdata/authdata';
 
 chai.use(chaiHttp);
+let adminToken;
+let attendantToken;
 
 describe('Authentication', () => {
+  before(async () => {
+    const response = await chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send(correctLogin);
+
+    adminToken = response.body.token;
+
+    const attendantResponse = await chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send(attendantLogin);
+    attendantToken = attendantResponse.body.token;
+  });
+
   describe('POST /login', () => {
     it('should return 400 if one or more fields are missing', async () => {
       const res = await chai.request(app)

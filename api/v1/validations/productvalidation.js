@@ -49,9 +49,6 @@ export default {
     if (!checkImgUrl.test(newImgUrl)) {
       errors.push('Please insert a valid image link.');
     }
-    const newPrice = parseFloat(price.trim(), 10).toFixed(2);
-    const newQuantity = parseInt(quantity.trim(), 10);
-    const newMinimumQuantity = parseInt(minimumQuantity.trim(), 10);
 
     if (errors.length > 0) {
       return res.status(400).send({
@@ -59,6 +56,10 @@ export default {
         data: errors,
       });
     }
+
+    const newPrice = parseFloat(price.trim(), 10).toFixed(2);
+    const newQuantity = parseInt(quantity.trim(), 10);
+    const newMinimumQuantity = parseInt(minimumQuantity.trim(), 10);
 
     req.body.name = newName;
     req.body.description = newDescription;
