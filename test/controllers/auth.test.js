@@ -5,6 +5,7 @@ import {
   missingFieldLogin, notExistLogin, wrongPassword,
   correctLogin, missingFieldSignup, invalidSignupData,
   existingEmail, validSignupData, attendantLogin,
+  invalidLength,
 } from '../mockdata/authdata';
 
 chai.use(chaiHttp);
@@ -104,6 +105,17 @@ describe('Authentication', () => {
         .post('/api/v1/auth/signup')
         .set({ Authorization: `Bearer ${adminToken}` })
         .send(invalidSignupData);
+
+      expect(res).to.have.status(400);
+      expect(res.body.success).to.equal(false);
+      expect(res.body).to.have.property('data');
+    });
+
+    it('should return 400 for invalid data length', async () => {
+      const res = await chai.request(app)
+        .post('/api/v1/auth/signup')
+        .set({ Authorization: `Bearer ${adminToken}` })
+        .send(invalidLength);
 
       expect(res).to.have.status(400);
       expect(res.body.success).to.equal(false);

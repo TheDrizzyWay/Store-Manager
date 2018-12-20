@@ -1,6 +1,6 @@
 const missingFieldLogin = {
   email: '',
-  password: 'password',
+  password: '',
 };
 
 const notExistLogin = {
@@ -39,6 +39,14 @@ const invalidSignupData = {
   role: 'attendant',
 };
 
+const invalidLength = {
+  firstName: '%',
+  lastName: '$',
+  email: 'email.com',
+  password: 'pas',
+  role: 'role',
+};
+
 const existingEmail = {
   firstName: 'firstname',
   lastName: 'lastname',
@@ -60,5 +68,5 @@ export {
   wrongPassword, correctLogin,
   missingFieldSignup, invalidSignupData,
   existingEmail, validSignupData,
-  attendantLogin,
+  attendantLogin, invalidLength,
 };

@@ -10,7 +10,7 @@ body {
 	height: 100%;
 }
 
-#headerContainer {
+.header_ontainer {
 	display: grid;
 }
 

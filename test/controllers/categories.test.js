@@ -5,7 +5,7 @@ import { correctLogin, attendantLogin } from '../mockdata/authdata';
 import {
   validCategory, invalidCategory, invalidData,
   existingCategory, validId, invalidId,
-  notExistId, updateCategory,
+  notExistId, updateCategory, invalidLength,
 } from '../mockdata/categorydata';
 
 chai.use(chaiHttp);
@@ -63,6 +63,17 @@ describe('Categories', () => {
         .post('/api/v1/categories')
         .set({ Authorization: `Bearer ${adminToken}` })
         .send(invalidData);
+
+      expect(res).to.have.status(400);
+      expect(res.body.success).to.equal(false);
+      expect(res.body).to.have.property('data');
+    });
+
+    it('should return 400 for invalid data length', async () => {
+      const res = await chai.request(app)
+        .post('/api/v1/categories')
+        .set({ Authorization: `Bearer ${adminToken}` })
+        .send(invalidLength);
 
       expect(res).to.have.status(400);
       expect(res.body.success).to.equal(false);

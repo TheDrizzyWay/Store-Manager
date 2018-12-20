@@ -8,11 +8,11 @@ const invalidProduct = {
 };
 
 const wrongProduct = {
-  name: 'a',
-  description: 'new description blah blah',
+  name: '%',
+  description: '*',
   price: '10000bc',
-  quantity: '10',
-  minimumQuantity: '3',
+  quantity: '10#',
+  minimumQuantity: '3%',
   imgUrl: 'abcd',
 };
 
