@@ -5,6 +5,7 @@ import { correctLogin } from '../mockdata/authdata';
 import {
   invalidProduct, wrongProduct, existingProduct, validProduct,
   notExistId, validId, updateProduct, missingProduct,
+  updateProduct2,
 } from '../mockdata/productdata';
 
 chai.use(chaiHttp);
@@ -94,7 +95,6 @@ describe('Products', () => {
 
       expect(res).to.have.status(200);
       expect(res.body.success).to.equal(true);
-      // expect(res.body).to.have.property('data');
     });
   });
 
@@ -171,6 +171,37 @@ describe('Products', () => {
       expect(res).to.have.status(200);
       expect(res.body.success).to.equal(true);
       expect(res.body).to.have.property('data');
+    });
+
+    it('should perform partial updating successfully', async () => {
+      const res = await chai.request(app)
+        .put(`/api/v1/products/${validId}`)
+        .set({ Authorization: `Bearer ${adminToken}` })
+        .send(updateProduct2);
+
+      expect(res).to.have.status(200);
+      expect(res.body.success).to.equal(true);
+      expect(res.body).to.have.property('data');
+    });
+  });
+
+  describe('DELETE /products/:id', () => {
+    it('should return 400 if id does not exist', async () => {
+      const res = await chai.request(app)
+        .delete(`/api/v1/products/${notExistId}`)
+        .set({ Authorization: `Bearer ${adminToken}` });
+
+      expect(res).to.have.status(400);
+      expect(res.body.success).to.equal(false);
+    });
+
+    it('should delete a product and return 200', async () => {
+      const res = await chai.request(app)
+        .delete(`/api/v1/products/${validId}`)
+        .set({ Authorization: `Bearer ${adminToken}` });
+
+      expect(res).to.have.status(200);
+      expect(res.body.success).to.equal(true);
     });
   });
 });

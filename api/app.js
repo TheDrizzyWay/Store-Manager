@@ -14,7 +14,7 @@ app.use('/', router);
 app.get('/', (req, res) => {
   res.status(200).send('Welcome to the Store Manager API!');
 });
-app.all('/api/v1/*', (req, res) => {
+app.get('/api/v1/*', (req, res) => {
   res.status(404).send({ message: 'Invalid request.' });
 });
 

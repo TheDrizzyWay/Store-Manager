@@ -49,6 +49,12 @@ const updateProduct = {
   price: '10000',
 };
 
+const updateProduct2 = {
+  quantity: '15',
+  minimumQuantity: '5',
+  imgUrl: 'http://sampleimage/image5.jpg',
+};
+
 const notExistId = '5a1f3030-cb52-462a-a81c-ab53f115ed22';
 
 const validId = '5a1f3030-cb52-462a-a81c-ab53f115ed21';
@@ -56,5 +62,5 @@ const validId = '5a1f3030-cb52-462a-a81c-ab53f115ed21';
 export {
   invalidProduct, wrongProduct, existingProduct,
   validProduct, notExistId, validId,
-  updateProduct, missingProduct,
+  updateProduct, missingProduct, updateProduct2,
 };

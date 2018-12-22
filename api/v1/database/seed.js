@@ -86,3 +86,19 @@ console.log('seeding database');
     return error;
   }
 })();
+
+(async () => {
+  const saleId = 'd88aea19-0e77-4134-a192-cb1048d13f8e';
+  const productId = '6522cc1b-c322-462a-97c1-0abd063135c6';
+  const sellerId = '3bcbff41-7285-42f4-a934-e346382f3fbc';
+  const params = [saleId, productId, 'Adidas x boot', '10000', '1',
+    '10000', sellerId];
+  let result;
+  try {
+    result = await pool.query(`INSERT INTO sales (sale_id, product_id, name, price, quantity_sold, total, seller_id)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)`, params);
+    return result;
+  } catch (error) {
+    return error;
+  }
+})();
