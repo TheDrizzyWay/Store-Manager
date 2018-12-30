@@ -11,9 +11,6 @@ app.use(express.static(path.join(__dirname, '../UI')));
 
 app.use('/', router);
 
-app.get('/', (req, res) => {
-  res.status(200).send('Welcome to the Store Manager API!');
-});
 app.get('/api/v1/*', (req, res) => {
   res.status(404).send({ message: 'Invalid request.' });
 });
