@@ -3,18 +3,12 @@ import pool from '../database/dbconfig';
 
 export default class Sale {
   constructor(sale) {
-    if (sale.id) {
-      this.id = sale.id;
-    }
     this.productId = sale.productId;
     this.name = sale.name;
     this.price = sale.price;
     this.quantitySold = sale.quantitySold;
     this.total = sale.saleTotal;
     this.sellerId = sale.sellerId;
-    if (sale.soldAt) {
-      this.soldAt = sale.soldAt;
-    }
   }
 
   async createSale() {

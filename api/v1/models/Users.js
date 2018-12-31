@@ -3,20 +3,11 @@ import pool from '../database/dbconfig';
 
 export default class User {
   constructor(user) {
-    if (user.id) {
-      this.id = user.id;
-    }
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.email = user.email;
     this.password = user.password;
     this.role = user.role;
-    if (user.createdAt) {
-      this.createdAt = user.createdAt;
-    }
-    if (user.updatedAt || user.updatedAt == null) {
-      this.updatedAt = user.updatedAt;
-    }
   }
 
   async signUp() {

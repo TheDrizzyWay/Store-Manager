@@ -3,16 +3,7 @@ import pool from '../database/dbconfig';
 
 export default class Category {
   constructor(category) {
-    if (category.id) {
-      this.id = category.id;
-    }
     this.name = category.name;
-    if (category.createdAt) {
-      this.createdAt = category.createdAt;
-    }
-    if (category.updatedAt || category.updatedAt == null) {
-      this.updatedAt = category.updatedAt;
-    }
   }
 
   async createCategory() {

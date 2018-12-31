@@ -3,9 +3,6 @@ import pool from '../database/dbconfig';
 
 export default class Product {
   constructor(product) {
-    if (product.id) {
-      this.id = product.id;
-    }
     this.name = product.name;
     this.description = product.description;
     this.price = product.price;
@@ -14,12 +11,6 @@ export default class Product {
     this.imgUrl = product.imgUrl;
     if (product.category || product.category == null) {
       this.category = product.category;
-    }
-    if (product.createdAt) {
-      this.createdAt = product.createdAt;
-    }
-    if (product.updatedAt || product.updatedAt == null) {
-      this.updatedAt = product.updatedAt;
     }
   }
 

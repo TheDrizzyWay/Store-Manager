@@ -7,10 +7,10 @@ import salesRoute from './salesroute';
 
 const router = new Router();
 
-router.use('/api/v1/auth', authRoute);
-router.use('/api/v1/users', userRoute);
-router.use('/api/v1/products', productRoute);
-router.use('/api/v1/categories', categoryRoute);
-router.use('/api/v1/sales', salesRoute);
+router.use('/auth', authRoute);
+router.use('/users', userRoute);
+router.use('/products', productRoute);
+router.use('/categories', categoryRoute);
+router.use('/sales', salesRoute);
 
 export default router;

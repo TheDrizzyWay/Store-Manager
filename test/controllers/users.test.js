@@ -33,6 +33,24 @@ describe('Users', () => {
       expect(res.body.success).to.equal(false);
     });
 
+    it('should return 401 for invalid token', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/users')
+        .set({ Authorization: null });
+
+      expect(res).to.have.status(401);
+      expect(res.body.success).to.equal(false);
+    });
+
+    it('should return 500 for internal error', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/users')
+        .set({ Authorization: 'Bearer abcd' });
+
+      expect(res).to.have.status(500);
+      expect(res.body.success).to.equal(false);
+    });
+
     it('should return 403 if user is not an admin', async () => {
       const res = await chai.request(app)
         .get('/api/v1/users')

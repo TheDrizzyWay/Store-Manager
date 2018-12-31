@@ -8,7 +8,7 @@ describe('App', () => {
   describe('GET /* - Non-existent routes', () => {
     it('Should display an error for non-existent routes', async () => {
       const res = await chai.request(app)
-        .get('/ap1/v1/whatever2');
+        .get('/whatever2');
 
       expect(res).to.have.status(404);
     });
