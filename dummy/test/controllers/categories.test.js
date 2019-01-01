@@ -57,7 +57,7 @@ describe('Categories', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
-          expect(res).to.be.a.json;
+          expect(res).to.be.a.json();
           done();
         });
     });
@@ -70,7 +70,7 @@ describe('Categories', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
-          expect(res).to.be.a.json;
+          expect(res).to.be.a.json();
           done();
         });
     });
@@ -81,7 +81,7 @@ describe('Categories', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
-          expect(res).to.be.a.json;
+          expect(res).to.be.a.json();
           done();
         });
     });
@@ -107,7 +107,7 @@ describe('Categories', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
-          expect(res).to.be.a.json;
+          expect(res).to.be.a.json();
           done();
         });
     });
@@ -130,7 +130,7 @@ describe('Categories', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(404);
-          expect(res).to.be.a.json;
+          expect(res).to.be.a.json();
           done();
         });
     });

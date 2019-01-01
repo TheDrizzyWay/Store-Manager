@@ -18,7 +18,6 @@ export default {
     productConfirm.quantity -= productQuantitySold;
     productConfirm.total = productPrice * productQuantitySold;
     saleOrder.total = productConfirm.total;
-    // confirm seller id
     const userEmail = loggedIn[0];
     const seller = allUsers.find(obj => obj.email === userEmail);
     const sellerId = seller.id;
@@ -42,7 +41,6 @@ export default {
       res.status(200).send({ success: true, message: 'Sale record found.', data: saleOrder });
     } else {
       const saleId = req.params.saleId;
-      // confirm seller id
       const userEmail = loggedIn[0];
       const seller = allUsers.find(obj => obj.email === userEmail);
       const sellerId = seller.id;

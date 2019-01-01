@@ -2,9 +2,6 @@ import moment from 'moment';
 import uuid from 'uuid';
 
 export const allUsers = [{
-  // use horror movie characters
-  // database array should be in a different folder
-  // create validation function to handle tostring and letter case
   id: 'd73febc3-a60d-433a-af20-9f4f89290c17',
   firstName: 'Tommy',
   lastName: 'Vercetti',
