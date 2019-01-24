@@ -1,7 +1,7 @@
 import Category from '../models/Categories';
 
-export default {
-  createCategory: async (req, res) => {
+export default class CategoryController {
+  static async createCategory(req, res) {
     const category = new Category(req.body);
     try {
       const result = await category.createCategory();
@@ -13,9 +13,9 @@ export default {
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }
-  },
+  }
 
-  getAllCategories: async (req, res) => {
+  static async getAllCategories(req, res) {
     try {
       const result = await Category.getAllCategories();
       if (result.length === 0) {
@@ -25,9 +25,9 @@ export default {
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }
-  },
+  }
 
-  getCategoryById: async (req, res) => {
+  static async getCategoryById(req, res) {
     try {
       const { id } = req.params;
       const result = await Category.getCategoryById(id);
@@ -38,9 +38,9 @@ export default {
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }
-  },
+  }
 
-  updateCategory: async (req, res) => {
+  static async updateCategory(req, res) {
     const { id } = req.params;
     try {
       const category = await Category.getCategoryById(id);
@@ -57,9 +57,9 @@ export default {
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }
-  },
+  }
 
-  deleteCategory: async (req, res) => {
+  static async deleteCategory(req, res) {
     try {
       const { id } = req.params;
       const findCategory = await Category.getCategoryById(id);
@@ -71,5 +71,5 @@ export default {
     } catch (error) {
       return res.status(500).send({ success: false, message: error.message });
     }
-  },
-};
+  }
+}

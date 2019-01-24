@@ -1,12 +1,12 @@
 import express from 'express';
-import categoryController from '../controllers/categorycontroller';
+import CategoryController from '../controllers/categorycontroller';
 import { requireAuth, adminAuth } from '../middleware/authmiddleware';
 import idValidation from '../validations/idvalidation';
 import categoryValidation from '../validations/categoryvalidation';
 
 const {
   createCategory, getAllCategories, getCategoryById, updateCategory, deleteCategory,
-} = categoryController;
+} = CategoryController;
 const { idValid } = idValidation;
 const { createCategoryValid } = categoryValidation;
 const router = express.Router();
